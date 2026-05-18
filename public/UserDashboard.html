@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Care Connect Nepal - Professional Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Poppins:wght@400;500;600;700;800;900&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-primary": "#ffffff",
+                        "secondary": "#485f84",
+                        "inverse-primary": "#ffb3b1",
+                        "surface-container-low": "#fff0ef",
+                        "on-secondary-container": "#445a7f",
+                        "on-background": "#271717",
+                        "background": "#fff8f7",
+                        "tertiary-fixed-dim": "#98cdf2",
+                        "surface-tint": "#bb152c",
+                        "secondary-container": "#bbd3fd",
+                        "tertiary-container": "#447a9c",
+                        "error": "#ba1a1a",
+                        "primary-fixed-dim": "#ffb3b1",
+                        "on-tertiary-fixed": "#001e2e",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed": "#410007",
+                        "inverse-surface": "#3e2c2b",
+                        "primary-fixed": "#ffdad8",
+                        "tertiary": "#286182",
+                        "on-secondary-fixed": "#001b3c",
+                        "on-tertiary-container": "#fcfcff",
+                        "surface": "#fff8f7",
+                        "surface-bright": "#fff8f7",
+                        "tertiary-fixed": "#c7e7ff",
+                        "surface-dim": "#f1d3d2",
+                        "outline-variant": "#e4bebc",
+                        "surface-variant": "#f9dcda",
+                        "surface-container": "#ffe9e8",
+                        "inverse-on-surface": "#ffedeb",
+                        "secondary-fixed-dim": "#b0c7f1",
+                        "on-tertiary-fixed-variant": "#064c6b",
+                        "surface-container-highest": "#f9dcda",
+                        "on-secondary-fixed-variant": "#30476a",
+                        "outline": "#8f6f6e",
+                        "on-primary-fixed-variant": "#92001c",
+                        "on-secondary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "primary": "#b7102a",
+                        "secondary-fixed": "#d5e3ff",
+                        "surface-container-high": "#ffe1e0",
+                        "on-error-container": "#93000a",
+                        "primary-container": "#db313f",
+                        "on-surface": "#271717",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-lowest": "#ffffff",
+                        "on-surface-variant": "#5b403f",
+                        "error-container": "#ffdad6"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xl": "80px",
+                        "sm": "12px",
+                        "container-max": "1200px",
+                        "xs": "4px",
+                        "md": "24px",
+                        "base": "8px",
+                        "lg": "48px",
+                        "gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "body-sm": ["Inter"],
+                        "label-caps": ["Inter"],
+                        "body-md": ["Inter"],
+                        "headline-lg": ["Poppins"],
+                        "body-lg": ["Inter"],
+                        "headline-xl": ["Poppins"],
+                        "accent-quote": ["Playfair Display"],
+                        "display-lg": ["Poppins"]
+                    },
+                    "fontSize": {
+                        "body-sm": ["14px", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "label-caps": ["12px", { "lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "700" }],
+                        "body-md": ["16px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-lg": ["24px", { "lineHeight": "1.3", "fontWeight": "600" }],
+                        "body-lg": ["18px", { "lineHeight": "1.6", "fontWeight": "400" }],
+                        "headline-xl": ["32px", { "lineHeight": "1.2", "fontWeight": "600" }],
+                        "accent-quote": ["20px", { "lineHeight": "1.4", "fontWeight": "500" }],
+                        "display-lg": ["48px", { "lineHeight": "1.1", "fontWeight": "700" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .material-symbols-outlined[style*="font-variation-settings: 'FILL' 1"] {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        .soft-shadow {
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+        }
+        .hover-shadow:hover {
+            box-shadow: 0 12px 32px rgba(0, 0, 0, 0.12);
+            transform: translateY(-2px);
+        }
+        
+        /* Hide scrollbar for horizontal scroll */
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+    </style>
+</head>
+<body class="bg-[#F8F9FA] text-on-surface font-body-md min-h-screen pb-24 md:pb-0">
+<!-- TopAppBar -->
+<header class="docked full-width top-0 z-50 border-t-2 border-[#E63946] bg-slate-50 dark:bg-slate-900 border-b border-slate-200 dark:border-slate-800 shadow-sm sticky">
+<div class="flex justify-between items-center px-4 h-16 w-full max-w-[1200px] mx-auto">
+<button class="text-[#E63946] dark:text-red-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors active:scale-95 duration-150 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">menu</span>
+</button>
+<div class="text-xl font-bold tracking-tight text-[#E63946] dark:text-red-500 font-poppins font-semibold">
+                Care Connect Nepal
+            </div>
+<div class="relative">
+<button class="text-[#E63946] dark:text-red-500 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors active:scale-95 duration-150 p-2 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<span class="absolute top-1.5 right-1.5 flex h-2.5 w-2.5">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E63946] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2.5 w-2.5 bg-[#E63946]"></span>
+</span>
+</div>
+</div>
+</header>
+<!-- Main Content Container -->
+<main class="w-full max-w-container-max mx-auto px-4 md:px-gutter pt-lg md:pt-xl pb-xl space-y-xl">
+<!-- Profile Header Section & Banner -->
+<section class="space-y-sm">
+<!-- Verification Banner -->
+<div class="bg-surface-container border border-[#2D6A4F]/20 rounded-xl p-4 flex items-start gap-4 shadow-sm">
+<div class="bg-[#2D6A4F]/10 p-2 rounded-full flex-shrink-0 mt-1">
+<span class="material-symbols-outlined text-[#2D6A4F]" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div>
+<p class="font-body-md text-on-surface-variant">Your profile is verified. You now have access to premium job listings.</p>
+</div>
+</div>
+<!-- Profile Header Card -->
+<div class="bg-white rounded-2xl p-6 md:p-8 soft-shadow border border-[#E9ECEF] flex flex-col md:flex-row items-center md:items-start gap-6 relative overflow-hidden">
+<!-- Decorative background motif -->
+<div class="absolute top-0 right-0 opacity-5 pointer-events-none w-64 h-64 -mt-16 -mr-16">
+<svg viewbox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+<path d="M44.7,-76.4C58.8,-69.2,71.8,-59.1,81.3,-46.3C90.8,-33.5,96.8,-18.1,96.5,-2.9C96.2,12.3,89.5,27.3,79.5,39.8C69.5,52.3,56.2,62.3,41.5,69.5C26.8,76.7,10.7,81.1,-4.8,83.9C-20.3,86.7,-35.1,87.9,-48.3,82.4C-61.5,76.9,-73.1,64.7,-81.4,50.6C-89.7,36.5,-94.7,20.5,-93.4,5.1C-92.1,-10.3,-84.5,-25.1,-75.1,-38.2C-65.7,-51.3,-54.5,-62.7,-41.4,-70.3C-28.3,-77.9,-13.3,-81.7,1.4,-84C16.1,-86.3,30.6,-83.6,44.7,-76.4Z" fill="#1D3557" transform="translate(100 100)"></path>
+</svg>
+</div>
+<div class="relative group">
+<div class="w-24 h-24 md:w-32 md:h-32 rounded-full overflow-hidden border-4 border-white shadow-md bg-slate-100 flex-shrink-0 z-10 relative">
+<!-- Abstract Mountain Motif Placeholder -->
+<div class="w-full h-full bg-gradient-to-br from-[#1D3557] to-[#457B9D] flex items-center justify-center text-white">
+<span class="material-symbols-outlined text-4xl" style="font-variation-settings: 'FILL' 1;">landscape</span>
+</div>
+</div>
+</div>
+<div class="flex-1 text-center md:text-left z-10">
+<div class="flex flex-col md:flex-row items-center md:items-start gap-3 mb-2">
+<h1 class="font-headline-xl text-on-surface">Sujal Paudel</h1>
+<span class="inline-flex items-center gap-1 bg-[#2D6A4F] text-white px-2 py-1 rounded-md font-label-caps mt-1 md:mt-2 shadow-sm">
+<span class="material-symbols-outlined text-[14px]" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+                            VERIFIED
+                        </span>
+</div>
+<p class="font-body-lg text-secondary mb-4">Professional Nurse</p>
+<div class="flex flex-wrap justify-center md:justify-start gap-2">
+<button class="bg-[#E63946] text-white px-6 py-2.5 rounded-lg font-body-md font-medium hover:bg-[#db313f] transition-colors shadow-sm">
+                            Edit Profile
+                        </button>
+<button class="border border-[#1D3557] text-[#1D3557] px-6 py-2.5 rounded-lg font-body-md font-medium hover:bg-slate-50 transition-colors">
+                            View Portfolio
+                        </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Row Bento Grid -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-md">
+<div class="bg-white rounded-2xl p-6 soft-shadow border border-[#E9ECEF] flex items-center gap-4 hover-shadow transition-all duration-300">
+<div class="w-12 h-12 rounded-full bg-primary-container/10 flex items-center justify-center text-primary-container">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">send</span>
+</div>
+<div>
+<p class="font-headline-xl text-on-surface mb-0">12</p>
+<p class="font-body-sm text-secondary">Jobs Applied</p>
+</div>
+</div>
+<div class="bg-white rounded-2xl p-6 soft-shadow border border-[#E9ECEF] flex items-center gap-4 hover-shadow transition-all duration-300">
+<div class="w-12 h-12 rounded-full bg-[#1D3557]/10 flex items-center justify-center text-[#1D3557]">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">forum</span>
+</div>
+<div>
+<p class="font-headline-xl text-on-surface mb-0">2</p>
+<p class="font-body-sm text-secondary">Interviews</p>
+</div>
+</div>
+<div class="bg-white rounded-2xl p-6 soft-shadow border border-[#E9ECEF] flex items-center gap-4 hover-shadow transition-all duration-300 relative overflow-hidden">
+<div class="absolute inset-0 bg-gradient-to-r from-transparent to-[#F8F9FA] opacity-50"></div>
+<div class="w-12 h-12 rounded-full bg-[#2D6A4F]/10 flex items-center justify-center text-[#2D6A4F] z-10 relative">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">visibility</span>
+</div>
+<div class="z-10 relative">
+<p class="font-headline-xl text-on-surface mb-0">150</p>
+<p class="font-body-sm text-secondary">Profile Views</p>
+</div>
+</div>
+</section>
+<!-- Recommended Jobs Horizontal Scroll -->
+<section class="space-y-md">
+<div class="flex justify-between items-end">
+<h2 class="font-headline-lg text-on-surface">Recommended for You</h2>
+<a class="font-body-sm text-tertiary-container hover:underline" href="#">View All</a>
+</div>
+<div class="flex overflow-x-auto gap-6 pb-6 no-scrollbar -mx-4 px-4 md:mx-0 md:px-0">
+<!-- Job Card 1 -->
+<div class="min-w-[300px] md:min-w-[340px] bg-white rounded-2xl p-6 soft-shadow border border-[#E9ECEF] flex flex-col justify-between hover-shadow transition-all duration-300 flex-shrink-0 cursor-pointer">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-red-50 flex items-center justify-center text-primary border border-red-100">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">local_hospital</span>
+</div>
+<span class="inline-flex items-center gap-1 bg-[#2D6A4F]/10 text-[#2D6A4F] px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                Verified NGO
+                            </span>
+</div>
+<h3 class="font-headline-lg text-[20px] text-on-surface mb-1">Public Health Officer</h3>
+<p class="font-body-md text-secondary mb-4">Red Cross Nepal</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="bg-slate-100 text-slate-700 px-2 py-1 rounded text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Kathmandu
+                            </span>
+<span class="bg-slate-100 text-slate-700 px-2 py-1 rounded text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">work</span> Full-time
+                            </span>
+</div>
+</div>
+<button class="w-full border border-[#1D3557] text-[#1D3557] py-2 rounded-lg font-body-md font-medium hover:bg-[#1D3557] hover:text-white transition-colors">
+                        Apply Now
+                    </button>
+</div>
+<!-- Job Card 2 -->
+<div class="min-w-[300px] md:min-w-[340px] bg-white rounded-2xl p-6 soft-shadow border border-[#E9ECEF] flex flex-col justify-between hover-shadow transition-all duration-300 flex-shrink-0 cursor-pointer">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-blue-50 flex items-center justify-center text-blue-600 border border-blue-100">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">groups</span>
+</div>
+<span class="inline-flex items-center gap-1 bg-[#2D6A4F]/10 text-[#2D6A4F] px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">
+<span class="material-symbols-outlined text-[12px]" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                Verified NGO
+                            </span>
+</div>
+<h3 class="font-headline-lg text-[20px] text-on-surface mb-1">Community Nurse</h3>
+<p class="font-body-md text-secondary mb-4">Save the Children</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="bg-slate-100 text-slate-700 px-2 py-1 rounded text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Pokhara
+                            </span>
+<span class="bg-slate-100 text-slate-700 px-2 py-1 rounded text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Contract
+                            </span>
+</div>
+</div>
+<button class="w-full border border-[#1D3557] text-[#1D3557] py-2 rounded-lg font-body-md font-medium hover:bg-[#1D3557] hover:text-white transition-colors">
+                        Apply Now
+                    </button>
+</div>
+<!-- Job Card 3 -->
+<div class="min-w-[300px] md:min-w-[340px] bg-white rounded-2xl p-6 soft-shadow border border-[#E9ECEF] flex flex-col justify-between hover-shadow transition-all duration-300 flex-shrink-0 cursor-pointer">
+<div>
+<div class="flex justify-between items-start mb-4">
+<div class="w-12 h-12 rounded-lg bg-emerald-50 flex items-center justify-center text-emerald-600 border border-emerald-100">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">healing</span>
+</div>
+<span class="inline-flex items-center gap-1 bg-slate-100 text-slate-500 px-2 py-0.5 rounded text-[10px] font-bold uppercase tracking-wider">
+                                Standard
+                            </span>
+</div>
+<h3 class="font-headline-lg text-[20px] text-on-surface mb-1">Clinic Supervisor</h3>
+<p class="font-body-md text-secondary mb-4">Rural Health Initiative</p>
+<div class="flex flex-wrap gap-2 mb-6">
+<span class="bg-slate-100 text-slate-700 px-2 py-1 rounded text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">location_on</span> Chitwan
+                            </span>
+<span class="bg-slate-100 text-slate-700 px-2 py-1 rounded text-xs font-medium flex items-center gap-1">
+<span class="material-symbols-outlined text-[14px]">work</span> Full-time
+                            </span>
+</div>
+</div>
+<button class="w-full border border-[#1D3557] text-[#1D3557] py-2 rounded-lg font-body-md font-medium hover:bg-[#1D3557] hover:text-white transition-colors">
+                        Apply Now
+                    </button>
+</div>
+</div>
+</section>
+<!-- Recent Applications List -->
+<section class="space-y-md">
+<h2 class="font-headline-lg text-on-surface">Recent Applications</h2>
+<div class="bg-white rounded-2xl soft-shadow border border-[#E9ECEF] overflow-hidden">
+<div class="divide-y divide-slate-100">
+<!-- App 1 -->
+<div class="p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center text-slate-500 flex-shrink-0">
+<span class="material-symbols-outlined">business</span>
+</div>
+<div>
+<h4 class="font-headline-lg text-[18px] text-on-surface mb-0.5">Senior Staff Nurse</h4>
+<p class="font-body-sm text-secondary">Himalayan Medical Trust • Applied 2 days ago</p>
+</div>
+</div>
+<div class="self-start md:self-auto">
+<span class="inline-flex items-center gap-1 bg-amber-50 text-amber-700 px-3 py-1 rounded-full text-xs font-semibold border border-amber-200">
+<span class="material-symbols-outlined text-[14px]">schedule</span> Pending
+                            </span>
+</div>
+</div>
+<!-- App 2 -->
+<div class="p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center text-slate-500 flex-shrink-0">
+<span class="material-symbols-outlined">business</span>
+</div>
+<div>
+<h4 class="font-headline-lg text-[18px] text-on-surface mb-0.5">Health Coordinator</h4>
+<p class="font-body-sm text-secondary">Global Care NGO • Applied 1 week ago</p>
+</div>
+</div>
+<div class="self-start md:self-auto">
+<span class="inline-flex items-center gap-1 bg-[#1D3557]/10 text-[#1D3557] px-3 py-1 rounded-full text-xs font-semibold border border-[#1D3557]/20">
+<span class="material-symbols-outlined text-[14px]">event_available</span> Interview
+                            </span>
+</div>
+</div>
+<!-- App 3 -->
+<div class="p-4 md:p-6 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:bg-slate-50 transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded bg-slate-100 flex items-center justify-center text-slate-500 flex-shrink-0">
+<span class="material-symbols-outlined">business</span>
+</div>
+<div>
+<h4 class="font-headline-lg text-[18px] text-on-surface mb-0.5">Field Medic</h4>
+<p class="font-body-sm text-secondary">Disaster Relief Nepal • Applied 2 weeks ago</p>
+</div>
+</div>
+<div class="self-start md:self-auto">
+<span class="inline-flex items-center gap-1 bg-slate-100 text-slate-600 px-3 py-1 rounded-full text-xs font-semibold border border-slate-200">
+<span class="material-symbols-outlined text-[14px]">cancel</span> Rejected
+                            </span>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Decorative Image Section -->
+<section class="mt-lg rounded-2xl overflow-hidden soft-shadow relative h-48 md:h-64 border border-[#E9ECEF]">
+<div class="absolute inset-0 bg-gradient-to-t from-slate-900/80 to-transparent z-10 flex items-end p-6">
+<p class="font-headline-lg text-white max-w-lg">Empowering professionals to make a difference in Nepal's healthcare landscape.</p>
+</div>
+<img alt="" class="w-full h-full object-cover" data-alt="A striking digital illustration representing the landscape of Nepal combined with medical and healthcare motifs. The image features a modern, clean, light-mode aesthetic with a corporate yet inspiring mood. Soft, ambient lighting illuminates subtle geometric patterns resembling mountain peaks in shades of deep navy blue (#1D3557) and crisp white, punctuated by vibrant accents of primary red (#E63946). The composition includes abstract nodes connecting like a network across the topography, symbolizing healthcare connectivity and professional impact." src="https://lh3.googleusercontent.com/aida/ADBb0uifpg9588kctaPnP89Nke4pVitI_5XbPhQGzhEkP75bHwyrzx79DaLyp83zGVPGQPqRH9uNx00agQl76_eYN_U1_DRKwID0bKfgbvzs_CXSQt_AX-Eis-Gv5R3Xl1fka9mphr1ZA8bha0WppzujtO0OQN99GbXdAX4GvsV75Nrr-BB7BQITRe-9zh6jw2y-SK9Bc3FXfC9DU0HFnK2jlwtHYlmNgi9DlcQgCykQRVb-q68dFCLB4pBPm-tVTesMWAetcHPkQpdL7N0"/>
+</section>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full flex justify-around items-center bg-white dark:bg-slate-950 py-2 px-4 pb-safe z-50 border-t border-slate-200 dark:border-slate-800 shadow-[0_-4px_12px_rgba(0,0,0,0.05)]">
+<button class="flex flex-col items-center justify-center text-[#E63946] dark:text-red-400 bg-red-50 dark:bg-red-950/30 rounded-xl px-3 py-1 active:scale-90 transition-transform duration-200">
+<span class="material-symbols-outlined mb-1 text-[20px]" style="font-variation-settings: 'FILL' 1;">dashboard</span>
+<span class="font-poppins text-[11px] font-medium">Home</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 active:scale-90 transition-transform duration-200 px-3 py-1">
+<span class="material-symbols-outlined mb-1 text-[20px]">work</span>
+<span class="font-poppins text-[11px] font-medium">Jobs</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 active:scale-90 transition-transform duration-200 px-3 py-1">
+<span class="material-symbols-outlined mb-1 text-[20px]">account_circle</span>
+<span class="font-poppins text-[11px] font-medium">Portfolio</span>
+</button>
+<button class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 hover:text-red-500 dark:hover:text-red-400 active:scale-90 transition-transform duration-200 px-3 py-1 relative">
+<span class="material-symbols-outlined mb-1 text-[20px]">notifications</span>
+<span class="absolute top-1 right-2 flex h-2 w-2">
+<span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#E63946] opacity-75"></span>
+<span class="relative inline-flex rounded-full h-2 w-2 bg-[#E63946]"></span>
+</span>
+<span class="font-poppins text-[11px] font-medium">Notifications</span>
+</button>
+</nav>
+</body></html>

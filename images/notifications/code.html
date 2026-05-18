@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700;900&amp;family=Inter:wght@400;600&amp;family=Noto+Serif:wght@400&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#271717",
+                        "surface-dim": "#f1d3d2",
+                        "surface": "#fff8f7",
+                        "on-tertiary-fixed-variant": "#00504a",
+                        "secondary-fixed": "#d5e3ff",
+                        "on-primary-fixed": "#410007",
+                        "inverse-surface": "#3e2c2b",
+                        "primary": "#b7102a",
+                        "surface-tint": "#bb152c",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#8cf4e8",
+                        "surface-variant": "#f9dcda",
+                        "on-primary-fixed-variant": "#92001c",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#ffedeb",
+                        "surface-container": "#ffe9e8",
+                        "inverse-primary": "#ffb3b1",
+                        "tertiary-fixed-dim": "#6fd8cc",
+                        "on-secondary-fixed": "#001b3c",
+                        "primary-fixed-dim": "#ffb3b1",
+                        "on-secondary-fixed-variant": "#30476a",
+                        "tertiary": "#006860",
+                        "on-tertiary-fixed": "#00201d",
+                        "on-tertiary-container": "#f3fffc",
+                        "on-surface": "#271717",
+                        "on-error-container": "#93000a",
+                        "background": "#fff8f7",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#5b403f",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#bbd3fd",
+                        "surface-container-high": "#ffe1e0",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#fff0ef",
+                        "primary-fixed": "#ffdad8",
+                        "on-primary-container": "#fffbff",
+                        "outline": "#8f6f6e",
+                        "tertiary-container": "#008379",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#445a7f",
+                        "secondary-fixed-dim": "#b0c7f1",
+                        "secondary": "#485f84",
+                        "surface-bright": "#fff8f7",
+                        "primary-container": "#db313f",
+                        "outline-variant": "#e4bebc",
+                        "surface-container-highest": "#f9dcda"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "md": "24px",
+                        "base": "8px",
+                        "lg": "48px",
+                        "xl": "80px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Poppins"],
+                        "h2": ["Poppins"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "quote-accent": ["Noto Serif"],
+                        "h1": ["Poppins"]
+                    },
+                    "fontSize": {
+                        "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["13px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "quote-accent": ["20px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "h1": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .mountain-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='40' viewBox='0 0 60 40' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 40L30 0L60 40H0Z' fill='%23b7102a' fill-opacity='0.03'/%3E%3C/svg%3E");
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full flex justify-between items-center px-4 py-3 bg-white/90 backdrop-blur-md border-b border-slate-200 z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-full bg-primary-container flex items-center justify-center overflow-hidden">
+<div class="w-full h-full bg-gradient-to-tr from-primary to-error opacity-80 flex items-center justify-center text-white">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">landscape</span>
+</div>
+</div>
+<h1 class="text-lg font-black text-slate-900 font-h3">Care Connect Nepal</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-slate-50 transition-colors active:scale-95 transition-transform text-slate-500">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="max-w-[1280px] mx-auto px-4 md:px-gutter py-8 pb-32">
+<div class="flex flex-col gap-8">
+<!-- Page Header & Filters -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4">
+<div>
+<h2 class="font-h2 text-h2 text-on-surface">Notifications</h2>
+<p class="text-on-surface-variant font-body-md mt-1">Stay updated with your latest activities and job matches.</p>
+</div>
+<!-- Filter Tabs -->
+<div class="flex bg-surface-container-low p-1 rounded-xl w-fit border border-outline-variant">
+<button class="px-6 py-2 rounded-lg font-label-sm text-primary font-bold bg-white shadow-sm transition-all">All</button>
+<button class="px-6 py-2 rounded-lg font-label-sm text-on-surface-variant hover:bg-surface-container transition-all">Jobs</button>
+<button class="px-6 py-2 rounded-lg font-label-sm text-on-surface-variant hover:bg-surface-container transition-all">KYC</button>
+</div>
+</div>
+<!-- Notifications Bento/List Hybrid -->
+<div class="grid grid-cols-1 gap-4">
+<!-- Notification 1: Interview Scheduled -->
+<div class="group relative bg-white border border-slate-200 rounded-xl p-5 hover:shadow-[0_4px_12px_rgba(29,53,87,0.08)] transition-all cursor-pointer overflow-hidden mountain-pattern">
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-emerald-50 flex items-center justify-center text-emerald-600">
+<span class="material-symbols-outlined text-[28px]" data-icon="calendar_today">calendar_today</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-h3 text-body-lg font-bold text-slate-900">Interview Scheduled! 🎉</h3>
+<div class="flex items-center gap-2">
+<span class="text-xs text-slate-400 font-label-sm">2h ago</span>
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mt-1">Congratulations! Your interview for the <span class="font-semibold text-slate-900">Health Coordinator</span> position has been set for tomorrow at 10:00 AM.</p>
+<div class="mt-4 flex gap-3">
+<button class="px-4 py-1.5 bg-primary text-white text-label-sm rounded-lg hover:bg-primary-container transition-colors">View Details</button>
+<button class="px-4 py-1.5 border border-slate-200 text-slate-600 text-label-sm rounded-lg hover:bg-slate-50 transition-colors">Reschedule</button>
+</div>
+</div>
+</div>
+</div>
+<!-- Notification 2: KYC Verified -->
+<div class="relative bg-white border border-slate-200 rounded-xl p-5 hover:shadow-[0_4px_12px_rgba(29,53,87,0.08)] transition-all cursor-pointer mountain-pattern">
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-green-50 flex items-center justify-center text-[#2D6A4F]">
+<span class="material-symbols-outlined text-[28px]" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-h3 text-body-lg font-bold text-slate-900">KYC Verified! ✅</h3>
+<span class="text-xs text-slate-400 font-label-sm">5h ago</span>
+</div>
+<p class="text-on-surface-variant font-body-md mt-1">Your professional identity has been successfully verified. You now have a <span class="text-[#2D6A4F] font-bold">Verified</span> badge on your profile, increasing your hireability.</p>
+</div>
+</div>
+</div>
+<!-- Notification 3: Job Match -->
+<div class="relative bg-white border border-slate-200 rounded-xl p-5 hover:shadow-[0_4px_12px_rgba(29,53,87,0.08)] transition-all cursor-pointer mountain-pattern">
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-purple-50 flex items-center justify-center text-purple-600">
+<span class="material-symbols-outlined text-[28px]" data-icon="work">work</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<div class="flex items-center gap-2">
+<h3 class="font-h3 text-body-lg font-bold text-slate-900">New Job Match 💼</h3>
+<span class="bg-purple-100 text-purple-700 text-[10px] px-2 py-0.5 rounded-full font-bold uppercase tracking-wider">High Match</span>
+</div>
+<div class="flex items-center gap-2">
+<span class="text-xs text-slate-400 font-label-sm">1d ago</span>
+<div class="w-2 h-2 rounded-full bg-primary"></div>
+</div>
+</div>
+<p class="text-on-surface-variant font-body-md mt-1">A new <span class="font-semibold text-slate-900">Social Worker</span> position in Kathmandu matches 95% of your skill set and experience. Apply before the deadline!</p>
+<div class="mt-4 flex items-center gap-4">
+<div class="flex -space-x-2">
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center overflow-hidden">
+<div class="w-full h-full bg-blue-100 flex items-center justify-center">
+<span class="material-symbols-outlined text-xs text-blue-600">domain</span>
+</div>
+</div>
+<div class="w-8 h-8 rounded-full border-2 border-white bg-slate-100 flex items-center justify-center overflow-hidden text-[10px] font-bold text-slate-400">
+                                        +3
+                                    </div>
+</div>
+<span class="text-xs text-slate-500 italic">Trusted NGO &amp; 3 others are hiring</span>
+</div>
+</div>
+</div>
+</div>
+<!-- Notification 4: Application Received -->
+<div class="relative bg-white border border-slate-200 rounded-xl p-5 hover:shadow-[0_4px_12px_rgba(29,53,87,0.08)] transition-all cursor-pointer mountain-pattern opacity-80">
+<div class="flex gap-4">
+<div class="flex-shrink-0 w-12 h-12 rounded-full bg-blue-50 flex items-center justify-center text-blue-600">
+<span class="material-symbols-outlined text-[28px]" data-icon="mark_email_read">mark_email_read</span>
+</div>
+<div class="flex-1">
+<div class="flex justify-between items-start">
+<h3 class="font-h3 text-body-lg font-bold text-slate-900">Application Received 📨</h3>
+<span class="text-xs text-slate-400 font-label-sm">2d ago</span>
+</div>
+<p class="text-on-surface-variant font-body-md mt-1">Your application for Senior Caretaker at Kathmandu Elderly Home has been successfully delivered to the hiring team.</p>
+</div>
+</div>
+</div>
+</div>
+<!-- Empty State Suggestion (Subtle) -->
+<div class="flex flex-col items-center justify-center py-12 text-center">
+<div class="w-16 h-16 bg-slate-50 rounded-full flex items-center justify-center text-slate-200 mb-4">
+<span class="material-symbols-outlined text-4xl" data-icon="history">history</span>
+</div>
+<p class="text-slate-400 font-label-sm">No older notifications</p>
+</div>
+</div>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe py-2 bg-white border-t border-slate-200 shadow-[0_-4px_12px_rgba(29,53,87,0.04)]">
+<a class="flex flex-col items-center justify-center text-slate-500 p-2 hover:text-red-500 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[11px] font-semibold font-sans">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 p-2 hover:text-red-500 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="text-[11px] font-semibold font-sans">Jobs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 p-2 hover:text-red-500 transition-all active:scale-90 duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-[11px] font-semibold font-sans">Portfolio</span>
+</a>
+<a class="flex flex-col items-center justify-center bg-red-50 text-red-600 rounded-xl px-4 py-1 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="notifications" style="font-variation-settings: 'FILL' 1;">notifications</span>
+<span class="text-[11px] font-semibold font-sans">Alerts</span>
+</a>
+</nav>
+<!-- Content Background Image for Aesthetic -->
+<div class="fixed bottom-0 right-0 -z-10 w-1/3 opacity-10 pointer-events-none">
+<img alt="Nepal mountains" class="w-full" data-alt="A sophisticated digital artwork showing the minimalist silhouettes of the Himalayan peaks in Nepal. The illustration uses a clean corporate modern aesthetic with light reds and soft grays on a pure white background. The composition is airy and professional, embodying national pride and institutional trust through rhythmic geometric lines and subtle textures." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDzE8i-hvCPUSQp7Ka2hapO79VEOizD-etoLjFv6MtmLs7_BCsG4C5i55rEURp7C5HKwhAohNIMr7guzspMk-hu_-IDcluC1EjfOYnIMZ_Y5k0-7mesgAAVwdv6cTbzUqTrp2pSU5dG91N0YCHblTEoFmDyFUQjFl5htsIYTOZDmKJfuQxAb5bnE0iSoDEv6Zc2RQKrpsZDyJFKdQOwWXtAcr9l1P7nRaw4JvE0_vihvlEEFc06tEG81M3lZECCo26Ij_SZiTAyj4E"/>
+</div>
+</body></html>
