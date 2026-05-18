@@ -108,13 +108,23 @@ const NotificationsScreen = ({ navigation }) => {
         <View className="flex-row items-center justify-between mb-4">
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            className="w-10 h-10 items-center justify-center bg-white/20 rounded-full border border-white/30"
+            className="w-10 h-10 items-center justify-center rounded-full"
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              borderColor: 'rgba(255, 255, 255, 0.3)',
+              borderWidth: 1,
+            }}
           >
             <ArrowLeft size={20} color="#ffffff" />
           </TouchableOpacity>
           <TouchableOpacity 
             onPress={markAllRead}
-            className="flex-row items-center px-4 py-2 bg-white/20 rounded-full border border-white/30"
+            className="flex-row items-center px-4 py-2 rounded-full"
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              borderColor: 'rgba(255, 255, 255, 0.3)',
+              borderWidth: 1,
+            }}
           >
             <CheckCheck size={14} color="#ffffff" />
             <Text className="text-white font-bold text-xs ml-1.5">Mark all read</Text>
@@ -139,7 +149,15 @@ const NotificationsScreen = ({ navigation }) => {
             <TouchableOpacity
               key={f}
               onPress={() => setFilter(f)}
-              className={`flex-1 py-2.5 rounded-xl items-center ${filter === f ? 'bg-primary shadow-sm' : ''}`}
+              className="flex-1 py-2.5 rounded-xl items-center"
+              style={filter === f ? {
+                backgroundColor: '#6366F1', // primary
+                shadowColor: '#000000',
+                shadowOffset: { width: 0, height: 1 },
+                shadowOpacity: 0.1,
+                shadowRadius: 2,
+                elevation: 1,
+              } : {}}
             >
               <Text className={`font-bold text-xs capitalize ${filter === f ? 'text-white' : 'text-slate-400'}`}>
                 {f}
@@ -161,7 +179,17 @@ const NotificationsScreen = ({ navigation }) => {
               <TouchableOpacity 
                 key={notification.id}
                 onPress={() => handleNotificationPress(notification)}
-                className={`bg-white rounded-[20px] p-4 flex-row border mb-3 ${isRead ? 'border-slate-100' : 'border-primary/20 shadow-sm shadow-primary/10'}`}
+                className="bg-white rounded-[20px] p-4 flex-row border mb-3"
+                style={isRead ? {
+                  borderColor: '#f1f5f9', // slate-100
+                } : {
+                  borderColor: 'rgba(99, 102, 241, 0.2)', // primary/20
+                  shadowColor: '#6366F1', // primary
+                  shadowOffset: { width: 0, height: 1 },
+                  shadowOpacity: 0.1,
+                  shadowRadius: 2,
+                  elevation: 1,
+                }}
               >
                 {!isRead && (
                   <View className="absolute top-4 left-1.5 w-2 h-2 bg-primary rounded-full" />
@@ -236,7 +264,14 @@ const NotificationsScreen = ({ navigation }) => {
 
             <TouchableOpacity 
               onPress={() => setSelectedNotification(null)}
-              className="bg-primary py-4 rounded-2xl items-center shadow-lg shadow-primary/20"
+              className="bg-primary py-4 rounded-2xl items-center"
+              style={{
+                shadowColor: '#6366F1',
+                shadowOffset: { width: 0, height: 10 },
+                shadowOpacity: 0.2,
+                shadowRadius: 20,
+                elevation: 5,
+              }}
             >
               <Text className="text-white font-bold">Close</Text>
             </TouchableOpacity>
