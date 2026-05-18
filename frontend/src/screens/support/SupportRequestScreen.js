@@ -215,7 +215,7 @@ const SupportRequestScreen = ({ navigation }) => {
             onChangeText={(val) => setFormData({ ...formData, description: val })}
           />
 
-          {image ? (
+          {!!image && (
             <TouchableOpacity 
               onPress={pickImage}
               className="mb-8 rounded-2xl overflow-hidden border border-border/30"
@@ -225,7 +225,9 @@ const SupportRequestScreen = ({ navigation }) => {
                 <ImageIcon size={16} color="#94A3B8" />
               </View>
             </TouchableOpacity>
-          ) : (
+          )}
+
+          {!image && (
             <TouchableOpacity 
               onPress={pickImage}
               className="h-20 border-2 border-dashed rounded-2xl items-center justify-center flex-row mb-8"

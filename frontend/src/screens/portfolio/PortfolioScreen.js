@@ -51,6 +51,9 @@ const PortfolioScreen = ({ navigation }) => {
         skills: (Array.isArray(data.skills) && data.skills.length > 0) 
           ? data.skills 
           : (Array.isArray(user?.skills) ? user.skills : []),
+        experience: data.experience || data.experiences || [],
+        certifications: data.certifications || [],
+        education: data.education || [],
       });
     } catch (error) {
       console.error("[PortfolioScreen] Error fetching portfolio:", error);
@@ -66,6 +69,190 @@ const PortfolioScreen = ({ navigation }) => {
     } finally {
       setLoading(false);
     }
+  };
+
+  const renderKycDot = () => {
+    const status = String(user?.kyc_status || '').toLowerCase();
+    const isVerified = user?.is_kyc_verified || ['verified', 'approved'].includes(status);
+    
+    if (isVerified) {
+      return (
+        <View style={[styles.verifiedDot, { backgroundColor: '#10B981' }]}>
+          <ShieldCheck size={12} color="#fff" />
+        </View>
+      );
+    }
+    if (['pending', 'submitted', 'in_review'].includes(status)) {
+      return (
+        <View style={[styles.verifiedDot, { backgroundColor: '#F59E0B' }]}>
+          <Clock size={10} color="#fff" />
+        </View>
+      );
+    }
+    if (['rejected', 'failed', 'info_requested'].includes(status)) {
+      return (
+        <View style={[styles.verifiedDot, { backgroundColor: '#EF4444' }]}>
+          <AlertTriangle size={10} color="#fff" />
+        </View>
+      );
+    }
+    return null;
+  };
+
+  const renderKycBadge = () => {
+    const status = String(user?.kyc_status || '').toLowerCase();
+    const isVerified = user?.is_kyc_verified || ['verified', 'approved'].includes(status);
+    
+    if (isVerified) {
+      return (
+        <View style={[styles.verifiedBadge, { backgroundColor: '#10B981' }]}>
+          <CheckCircle2 size={11} color="#fff" />
+          <Text style={styles.verifiedBadgeText}>VERIFIED</Text>
+        </View>
+      );
+    }
+    if (['pending', 'submitted', 'in_review'].includes(status)) {
+      return (
+        <View style={[styles.verifiedBadge, { backgroundColor: '#F59E0B' }]}>
+          <Clock size={11} color="#fff" />
+          <Text style={styles.verifiedBadgeText}>IN REVIEW</Text>
+        </View>
+      );
+    }
+    if (['rejected', 'failed', 'info_requested'].includes(status)) {
+      return (
+        <TouchableOpacity 
+          onPress={() => navigation.navigate('KycSubmit')}
+          style={[styles.verifiedBadge, { backgroundColor: '#EF4444' }]}
+        >
+          <AlertTriangle size={11} color="#fff" />
+          <Text style={styles.verifiedBadgeText}>{status === 'info_requested' ? 'FIX NEEDED' : 'REJECTED'}</Text>
+        </TouchableOpacity>
+      );
+    }
+    return (
+      <TouchableOpacity 
+        onPress={() => navigation.navigate('KycSubmit')}
+        style={[styles.verifiedBadge, { backgroundColor: '#94A3B8' }]}
+      >
+        <AlertTriangle size={11} color="#fff" />
+        <Text style={styles.verifiedBadgeText}>UNVERIFIED</Text>
+      </TouchableOpacity>
+    );
+  };
+
+  const renderExperience = () => {
+    const experiences = portfolio?.experience || [];
+    if (experiences.length === 0) return null;
+
+    return experiences.map((exp, idx) => {
+      const bulletsList = exp.bullets || (exp.description ? exp.description.split('\n').map(b => b.trim()).filter(Boolean) : []);
+      const periodText = exp.period || (exp.start_year && exp.end_year ? `${exp.start_year} - ${exp.end_year}` : exp.start_year || exp.end_year || '');
+      
+      return (
+        <View key={exp.id || idx} style={[styles.timelineItem, idx > 0 && { marginTop: 20, paddingTop: 20, borderTopWidth: 1, borderTopColor: '#f1f5f9' }]}>
+          <View style={{ flexDirection: 'row' }}>
+            <View style={styles.timelineIcon}>
+              <Briefcase size={18} color={COLORS.navy} />
+            </View>
+            <View style={{ flex: 1 }}>
+              <Text style={styles.expTitle}>{exp.job_title || exp.title}</Text>
+              <Text style={styles.expCompany}>{exp.organization || exp.company}</Text>
+              {!!periodText && <Text style={styles.expPeriod}>{periodText}</Text>}
+              {bulletsList.map((bullet, bIdx) => (
+                <View key={bIdx} style={styles.bulletRow}>
+                  <CheckCircle2 size={14} color={COLORS.success} />
+                  <Text style={styles.bulletText}>{bullet}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        </View>
+      );
+    });
+  };
+
+  const renderCertifications = () => {
+    const certs = portfolio?.certifications || [];
+    if (certs.length === 0) return null;
+
+    return certs.map((cert, idx) => (
+      <View key={cert.id || idx} style={styles.certItem}>
+        <View style={styles.certIcon}>
+          <Award size={22} color={COLORS.red} />
+        </View>
+        <View>
+          <Text style={styles.certName}>{cert.name}</Text>
+          <Text style={styles.certIssuer}>{cert.issuer}</Text>
+          <Text style={styles.certDate}>{cert.date}</Text>
+        </View>
+      </View>
+    ));
+  };
+
+  const renderCertificationsSection = () => {
+    const certs = portfolio?.certifications || [];
+    if (certs.length === 0) return null;
+    return (
+      <View style={styles.sectionCard}>
+        <View style={styles.sectionTitleRow}>
+          <View style={[styles.sectionIconWrap, { backgroundColor: '#fde8ea' }]}>
+            <Award size={16} color={COLORS.primaryContainer} />
+          </View>
+          <Text style={styles.sectionTitle}>Certifications</Text>
+        </View>
+        {renderCertifications()}
+      </View>
+    );
+  };
+
+  const renderEducation = () => {
+    const educationList = portfolio?.education || [];
+    if (educationList.length === 0) return null;
+
+    return educationList.map((edu, idx) => {
+      const yearText = edu.year || (edu.start_year && edu.end_year ? `${edu.start_year} - ${edu.end_year}` : edu.start_year || edu.end_year || '');
+      return (
+        <View key={edu.id || idx} style={styles.certItem}>
+          <View style={[styles.certIcon, { backgroundColor: '#FEF3C7' }]}>
+            <GraduationCap size={22} color="#B45309" />
+          </View>
+          <View>
+            <Text style={styles.certName}>{edu.degree}</Text>
+            <Text style={styles.certIssuer}>{edu.institution}</Text>
+            <Text style={styles.certDate}>{yearText}</Text>
+          </View>
+        </View>
+      );
+    });
+  };
+
+  const renderSkills = () => {
+    const skills = portfolio?.skills || [];
+    if (skills.length === 0) return null;
+    return skills.map((skill, idx) => (
+      <View key={idx} style={styles.skillChip}>
+        <Text style={styles.skillText}>{skill}</Text>
+      </View>
+    ));
+  };
+
+  const renderLanguages = () => {
+    const languages = portfolio?.languages || [];
+    if (languages.length === 0) return null;
+    return (
+      <View style={{ marginTop: 20 }}>
+        <Text style={styles.subSectionTitle}>Language Proficiency</Text>
+        {languages.map((lang, idx) => (
+          <View key={idx} style={styles.langRow}>
+            <Text style={styles.langName}>{lang.name}</Text>
+            <View style={styles.langBarBg}>
+              <View style={[styles.langBarFill, { width: `${lang.level}%` }]} />
+            </View>
+          </View>
+        ))}
+      </View>
+    );
   };
 
   if (loading) {
@@ -104,32 +291,7 @@ const PortfolioScreen = ({ navigation }) => {
                   <Text style={styles.avatarInitial}>{(user?.full_name || user?.username || 'U').charAt(0)}</Text>
                 </View>
               )}
-              {(() => {
-                const status = String(user?.kyc_status || '').toLowerCase();
-                const isVerified = user?.is_kyc_verified || ['verified', 'approved'].includes(status);
-                
-                if (isVerified) {
-                  return (
-                    <View style={[styles.verifiedDot, { backgroundColor: '#10B981' }]}>
-                      <ShieldCheck size={12} color="#fff" />
-                    </View>
-                  );
-                } else if (['pending', 'submitted', 'in_review'].includes(status)) {
-                  return (
-                    <View style={[styles.verifiedDot, { backgroundColor: '#F59E0B' }]}>
-                      <Clock size={10} color="#fff" />
-                    </View>
-                  );
-                } else if (['rejected', 'failed', 'info_requested'].includes(status)) {
-                  return (
-                    <View style={[styles.verifiedDot, { backgroundColor: '#EF4444' }]}>
-                      <AlertTriangle size={10} color="#fff" />
-                    </View>
-                  );
-                } else {
-                  return null;
-                }
-              })()}
+              {renderKycDot()}
             </View>
             <TouchableOpacity
               style={styles.editBtn}
@@ -142,46 +304,7 @@ const PortfolioScreen = ({ navigation }) => {
           <View style={styles.profileMeta}>
             <View style={styles.nameRow}>
               <Text style={styles.userName}>{user?.full_name || user?.username || 'Care Professional'}</Text>
-              {(() => {
-                const status = String(user?.kyc_status || '').toLowerCase();
-                const isVerified = user?.is_kyc_verified || ['verified', 'approved'].includes(status);
-                
-                if (isVerified) {
-                  return (
-                    <View style={[styles.verifiedBadge, { backgroundColor: '#10B981' }]}>
-                      <CheckCircle2 size={11} color="#fff" />
-                      <Text style={styles.verifiedBadgeText}>VERIFIED</Text>
-                    </View>
-                  );
-                } else if (['pending', 'submitted', 'in_review'].includes(status)) {
-                  return (
-                    <View style={[styles.verifiedBadge, { backgroundColor: '#F59E0B' }]}>
-                      <Clock size={11} color="#fff" />
-                      <Text style={styles.verifiedBadgeText}>IN REVIEW</Text>
-                    </View>
-                  );
-                } else if (['rejected', 'failed', 'info_requested'].includes(status)) {
-                  return (
-                    <TouchableOpacity 
-                      onPress={() => navigation.navigate('KycSubmit')}
-                      style={[styles.verifiedBadge, { backgroundColor: '#EF4444' }]}
-                    >
-                      <AlertTriangle size={11} color="#fff" />
-                      <Text style={styles.verifiedBadgeText}>{status === 'info_requested' ? 'FIX NEEDED' : 'REJECTED'}</Text>
-                    </TouchableOpacity>
-                  );
-                } else {
-                  return (
-                    <TouchableOpacity 
-                      onPress={() => navigation.navigate('KycSubmit')}
-                      style={[styles.verifiedBadge, { backgroundColor: '#94A3B8' }]}
-                    >
-                      <AlertTriangle size={11} color="#fff" />
-                      <Text style={styles.verifiedBadgeText}>UNVERIFIED</Text>
-                    </TouchableOpacity>
-                  );
-                }
-              })()}
+              {renderKycBadge()}
             </View>
             <Text style={styles.profession}>{user?.professional_title || 'Healthcare Professional'}</Text>
             <View style={styles.metaRow}>
@@ -206,27 +329,11 @@ const PortfolioScreen = ({ navigation }) => {
             <Text style={styles.sectionTitle}>Core Expertise</Text>
           </View>
           <View style={styles.skillsGrid}>
-            {portfolio?.skills?.map((skill, idx) => (
-              <View key={idx} style={styles.skillChip}>
-                <Text style={styles.skillText}>{skill}</Text>
-              </View>
-            ))}
+            {renderSkills()}
           </View>
 
           {/* Language Proficiency */}
-          {portfolio?.languages && (
-            <View style={{ marginTop: 20 }}>
-              <Text style={styles.subSectionTitle}>Language Proficiency</Text>
-              {portfolio.languages.map((lang, idx) => (
-                <View key={idx} style={styles.langRow}>
-                  <Text style={styles.langName}>{lang.name}</Text>
-                  <View style={styles.langBarBg}>
-                    <View style={[styles.langBarFill, { width: `${lang.level}%` }]} />
-                  </View>
-                </View>
-              ))}
-            </View>
-          )}
+          {renderLanguages()}
         </View>
 
         {/* Professional Summary */}
@@ -257,55 +364,11 @@ const PortfolioScreen = ({ navigation }) => {
             </TouchableOpacity>
           </View>
 
-          {portfolio?.experience?.map((exp, idx) => (
-            <View key={exp.id} style={[styles.timelineItem, idx > 0 && { marginTop: 20, paddingTop: 20, borderTopWidth: 1, borderTopColor: '#f1f5f9' }]}>
-              <View style={{ flexDirection: 'row' }}>
-                <View style={styles.timelineIcon}>
-                  <Briefcase size={18} color={COLORS.navy} />
-                </View>
-                <View style={{ flex: 1 }}>
-                  <Text style={styles.expTitle}>{exp.job_title || exp.title}</Text>
-                  <Text style={styles.expCompany}>{exp.organization || exp.company}</Text>
-                  <Text style={styles.expPeriod}>{exp.period}</Text>
-                   {(() => {
-                    const bulletsList = exp.bullets || (exp.description ? exp.description.split('\n').map(b => b.trim()).filter(Boolean) : []);
-                    return bulletsList.map((bullet, bIdx) => (
-                      <View key={bIdx} style={styles.bulletRow}>
-                        <CheckCircle2 size={14} color={COLORS.success} />
-                        <Text style={styles.bulletText}>{bullet}</Text>
-                      </View>
-                    ));
-                  })()}
-                </View>
-              </View>
-            </View>
-          ))}
+          {renderExperience()}
         </View>
 
         {/* Certifications */}
-        {portfolio?.certifications?.length > 0 && (
-          <View style={styles.sectionCard}>
-            <View style={styles.sectionTitleRow}>
-              <View style={[styles.sectionIconWrap, { backgroundColor: '#fde8ea' }]}>
-                <Award size={16} color={COLORS.primaryContainer} />
-              </View>
-              <Text style={styles.sectionTitle}>Certifications</Text>
-            </View>
-
-            {portfolio.certifications.map((cert) => (
-              <View key={cert.id} style={styles.certItem}>
-                <View style={styles.certIcon}>
-                  <Award size={22} color={COLORS.red} />
-                </View>
-                <View>
-                  <Text style={styles.certName}>{cert.name}</Text>
-                  <Text style={styles.certIssuer}>{cert.issuer}</Text>
-                  <Text style={styles.certDate}>{cert.date}</Text>
-                </View>
-              </View>
-            ))}
-          </View>
-        )}
+        {renderCertificationsSection()}
 
         {/* Education */}
         <View style={styles.sectionCard}>
@@ -321,18 +384,7 @@ const PortfolioScreen = ({ navigation }) => {
               <Plus size={16} color={COLORS.red} />
             </TouchableOpacity>
           </View>
-          {portfolio?.education?.map((edu) => (
-            <View key={edu.id} style={styles.certItem}>
-              <View style={[styles.certIcon, { backgroundColor: '#FEF3C7' }]}>
-                <GraduationCap size={22} color="#B45309" />
-              </View>
-              <View>
-                <Text style={styles.certName}>{edu.degree}</Text>
-                <Text style={styles.certIssuer}>{edu.institution}</Text>
-                <Text style={styles.certDate}>{edu.year}</Text>
-              </View>
-            </View>
-          ))}
+          {renderEducation()}
         </View>
 
         {/* Download Button */}
