@@ -40,6 +40,89 @@ const ProfessionalPortfolioScreen = ({ route, navigation }) => {
     </View>
   );
 
+  const renderAvatar = () => {
+    if (displayUser?.profile_image) {
+      return (
+        <Image 
+          source={{ uri: displayUser.profile_image }} 
+          style={{ width: '100%', height: '100%', borderRadius: BORDER_RADIUS.l }} 
+        />
+      );
+    }
+    return (
+      <Text style={{ fontSize: 36, fontWeight: '700', color: COLORS.on_primary_fixed }}>
+        {portfolio.image}
+      </Text>
+    );
+  };
+
+  const renderKycBadge = () => {
+    if (!portfolio.verified) return null;
+    return (
+      <View style={{
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: COLORS.tertiary_fixed,
+        paddingHorizontal: SPACING.m,
+        paddingVertical: SPACING.s,
+        borderRadius: BORDER_RADIUS.m,
+        marginBottom: SPACING.m,
+      }}>
+        <CheckCircle2 size={16} color={COLORS.tertiary} style={{ marginRight: SPACING.s }} />
+        <Text style={{
+          color: COLORS.tertiary,
+          fontWeight: '600',
+          fontSize: 12,
+        }}>
+          Verified Professional
+        </Text>
+      </View>
+    );
+  };
+
+  const renderSkills = () => {
+    return portfolio.skills.map((skill, index) => (
+      <SkillBadge key={index} skill={skill} />
+    ));
+  };
+
+  const renderExperience = () => {
+    return portfolio.experience.map((exp, index) => (
+      <View
+        key={index}
+        style={{
+          backgroundColor: COLORS.surface_container_lowest,
+          borderRadius: BORDER_RADIUS.m,
+          padding: SPACING.m,
+          marginBottom: SPACING.m,
+          borderWidth: 1,
+          borderColor: COLORS.outline_variant,
+        }}
+      >
+        <Text style={{
+          fontWeight: '600',
+          color: COLORS.on_surface,
+          marginBottom: SPACING.xs,
+        }}>
+          {exp.role}
+        </Text>
+        <Text style={{
+          fontSize: 13,
+          color: COLORS.on_surface_variant,
+          marginBottom: SPACING.xs,
+        }}>
+          {exp.org}
+        </Text>
+        <Text style={{
+          fontSize: 12,
+          color: COLORS.on_surface_variant,
+        }}>
+          {exp.duration}
+        </Text>
+      </View>
+    ));
+  };
+
   return (
     <View style={{ flex: 1, backgroundColor: COLORS.surface }}>
       {/* Header */}
@@ -90,16 +173,7 @@ const ProfessionalPortfolioScreen = ({ route, navigation }) => {
             borderWidth: 3,
             borderColor: COLORS.surface,
           }}>
-            {displayUser?.profile_image ? (
-              <Image 
-                source={{ uri: displayUser.profile_image }} 
-                style={{ width: '100%', height: '100%', borderRadius: BORDER_RADIUS.l }} 
-              />
-            ) : (
-              <Text style={{ fontSize: 36, fontWeight: '700', color: COLORS.on_primary_fixed }}>
-                {portfolio.image}
-              </Text>
-            )}
+            {renderAvatar()}
           </View>
           <Text style={{
             fontSize: 22,
@@ -116,26 +190,7 @@ const ProfessionalPortfolioScreen = ({ route, navigation }) => {
           }}>
             {portfolio.role}
           </Text>
-          {portfolio.verified && (
-            <View style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              backgroundColor: COLORS.tertiary_fixed,
-              paddingHorizontal: SPACING.m,
-              paddingVertical: SPACING.s,
-              borderRadius: BORDER_RADIUS.m,
-              marginBottom: SPACING.m,
-            }}>
-              <CheckCircle2 size={16} color={COLORS.tertiary} style={{ marginRight: SPACING.s }} />
-              <Text style={{
-                color: COLORS.tertiary,
-                fontWeight: '600',
-                fontSize: 12,
-              }}>
-                Verified Professional
-              </Text>
-            </View>
-          )}
+          {renderKycBadge()}
         </View>
 
         {/* Content */}
@@ -170,9 +225,7 @@ const ProfessionalPortfolioScreen = ({ route, navigation }) => {
               Skills
             </Text>
             <View style={{ flexDirection: 'row', flexWrap: 'wrap' }}>
-              {portfolio.skills.map((skill, index) => (
-                <SkillBadge key={index} skill={skill} />
-              ))}
+              {renderSkills()}
             </View>
           </View>
 
@@ -186,40 +239,7 @@ const ProfessionalPortfolioScreen = ({ route, navigation }) => {
             }}>
               Experience
             </Text>
-            {portfolio.experience.map((exp, index) => (
-              <View
-                key={index}
-                style={{
-                  backgroundColor: COLORS.surface_container_lowest,
-                  borderRadius: BORDER_RADIUS.m,
-                  padding: SPACING.m,
-                  marginBottom: SPACING.m,
-                  borderWidth: 1,
-                  borderColor: COLORS.outline_variant,
-                }}
-              >
-                <Text style={{
-                  fontWeight: '600',
-                  color: COLORS.on_surface,
-                  marginBottom: SPACING.xs,
-                }}>
-                  {exp.role}
-                </Text>
-                <Text style={{
-                  fontSize: 13,
-                  color: COLORS.on_surface_variant,
-                  marginBottom: SPACING.xs,
-                }}>
-                  {exp.org}
-                </Text>
-                <Text style={{
-                  fontSize: 12,
-                  color: COLORS.on_surface_variant,
-                }}>
-                  {exp.duration}
-                </Text>
-              </View>
-            ))}
+            {renderExperience()}
           </View>
 
           {/* CTA Buttons */}
