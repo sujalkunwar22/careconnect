@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Care Connect Nepal Professional Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;family=Inter:wght@400;600&amp;family=Noto+Serif&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-background": "#271717",
+                        "surface-dim": "#f1d3d2",
+                        "surface": "#fff8f7",
+                        "on-tertiary-fixed-variant": "#00504a",
+                        "secondary-fixed": "#d5e3ff",
+                        "on-primary-fixed": "#410007",
+                        "inverse-surface": "#3e2c2b",
+                        "primary": "#b7102a",
+                        "surface-tint": "#bb152c",
+                        "surface-container-lowest": "#ffffff",
+                        "tertiary-fixed": "#8cf4e8",
+                        "surface-variant": "#f9dcda",
+                        "on-primary-fixed-variant": "#92001c",
+                        "error": "#ba1a1a",
+                        "inverse-on-surface": "#ffedeb",
+                        "surface-container": "#ffe9e8",
+                        "inverse-primary": "#ffb3b1",
+                        "tertiary-fixed-dim": "#6fd8cc",
+                        "on-secondary-fixed": "#001b3c",
+                        "primary-fixed-dim": "#ffb3b1",
+                        "on-secondary-fixed-variant": "#30476a",
+                        "tertiary": "#006860",
+                        "on-tertiary-fixed": "#00201d",
+                        "on-tertiary-container": "#f3fffc",
+                        "on-surface": "#271717",
+                        "on-error-container": "#93000a",
+                        "background": "#fff8f7",
+                        "on-secondary": "#ffffff",
+                        "on-surface-variant": "#5b403f",
+                        "error-container": "#ffdad6",
+                        "secondary-container": "#bbd3fd",
+                        "surface-container-high": "#ffe1e0",
+                        "on-tertiary": "#ffffff",
+                        "surface-container-low": "#fff0ef",
+                        "primary-fixed": "#ffdad8",
+                        "on-primary-container": "#fffbff",
+                        "outline": "#8f6f6e",
+                        "tertiary-container": "#008379",
+                        "on-primary": "#ffffff",
+                        "on-error": "#ffffff",
+                        "on-secondary-container": "#445a7f",
+                        "secondary-fixed-dim": "#b0c7f1",
+                        "secondary": "#485f84",
+                        "surface-bright": "#fff8f7",
+                        "primary-container": "#db313f",
+                        "outline-variant": "#e4bebc",
+                        "surface-container-highest": "#f9dcda"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "md": "24px",
+                        "base": "8px",
+                        "lg": "48px",
+                        "xl": "80px",
+                        "sm": "12px"
+                    },
+                    "fontFamily": {
+                        "h3": ["Poppins"],
+                        "h2": ["Poppins"],
+                        "body-md": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "body-lg": ["Inter"],
+                        "quote-accent": ["Noto Serif"],
+                        "h1": ["Poppins"]
+                    },
+                    "fontSize": {
+                        "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["13px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "quote-accent": ["20px", {"lineHeight": "1.5", "fontWeight": "400"}],
+                        "h1": ["48px", {"lineHeight": "12", "fontWeight": "700"}]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .mountain-pattern {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 60 L30 10 L60 60' fill='none' stroke='%23b7102a' stroke-width='0.5' opacity='0.08'/%3E%3C/svg%3E");
+        }
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 24px;
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-background text-on-background font-body-md min-h-screen pb-32">
+<!-- TopAppBar -->
+<header class="sticky top-0 w-full flex justify-between items-center px-4 py-3 bg-white/90 backdrop-blur-md dark:bg-slate-950/90 border-b border-slate-200 dark:border-slate-800 z-50">
+<div class="flex items-center gap-3">
+<div class="w-10 h-10 rounded-lg bg-primary flex items-center justify-center overflow-hidden">
+<!-- Geometric SVG Mountain Motif Pattern -->
+<svg class="w-full h-full fill-white opacity-90" viewbox="0 0 100 100">
+<path d="M10 90 L50 20 L90 90 Z"></path>
+<path d="M30 90 L60 40 L90 90 Z" opacity="0.6"></path>
+</svg>
+</div>
+<h1 class="text-lg font-black text-slate-900 dark:text-white font-sans tracking-tight">Care Connect Nepal</h1>
+</div>
+<div class="flex items-center gap-2">
+<button class="p-2 rounded-full hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors active:scale-95">
+<span class="material-symbols-outlined text-slate-900 dark:text-slate-100" data-icon="notifications">notifications</span>
+</button>
+</div>
+</header>
+<main class="max-w-container-max mx-auto px-gutter py-base">
+<!-- Profile Header Section -->
+<section class="mt-base mb-lg">
+<div class="bg-surface-container-lowest border border-outline-variant rounded-xl p-md relative overflow-hidden mountain-pattern">
+<div class="flex flex-col md:flex-row items-center gap-6 relative z-10">
+<div class="w-24 h-24 rounded-full border-4 border-white shadow-md flex items-center justify-center bg-secondary-container overflow-hidden">
+<!-- Geometric Avatar Placeholder -->
+<svg class="w-full h-full p-4" viewbox="0 0 100 100">
+<circle cx="50" cy="50" fill="none" r="40" stroke="#1D3557" stroke-width="2"></circle>
+<path d="M50 20 L80 80 L20 80 Z" fill="#457B9D"></path>
+</svg>
+</div>
+<div class="text-center md:text-left">
+<div class="flex items-center justify-center md:justify-start gap-2 mb-1">
+<h2 class="font-h3 text-h3 text-on-surface">Aayush Nepal</h2>
+<span class="flex items-center gap-1 px-3 py-1 bg-[#2D6A4F]/10 border border-[#2D6A4F] text-[#2D6A4F] rounded-full text-label-sm">
+<span class="material-symbols-outlined text-sm" data-icon="verified" style="font-variation-settings: 'FILL' 1;">verified</span>
+                                Verified
+                            </span>
+</div>
+<p class="text-on-surface-variant font-body-md">Senior Healthcare Administrator | Kathmandu, Nepal</p>
+<!-- Identity Verified Subtle Confirmation -->
+<div class="mt-2 inline-flex items-center gap-2 px-3 py-1 bg-surface-container-low rounded-lg text-label-sm text-on-tertiary-fixed-variant">
+<span class="material-symbols-outlined text-sm" data-icon="shield_check">shield</span>
+                            Government ID and Medical Certification Verified
+                        </div>
+</div>
+<div class="md:ml-auto flex gap-3">
+<button class="bg-primary text-white px-6 py-2 rounded-lg font-semibold shadow-sm active:scale-95 transition-transform">Edit Profile</button>
+<button class="border border-secondary text-secondary px-6 py-2 rounded-lg font-semibold active:scale-95 transition-transform">Share</button>
+</div>
+</div>
+</div>
+</section>
+<!-- Stats Row -->
+<section class="grid grid-cols-1 md:grid-cols-3 gap-md mb-lg">
+<div class="bg-white border border-outline-variant p-md rounded-xl hover:shadow-[0_4px_12px_rgba(29,53,87,0.08)] transition-all">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary" data-icon="work">work</span>
+<span class="font-label-sm uppercase text-slate-500">Jobs Applied</span>
+</div>
+<div class="text-h2 font-h2 text-on-surface">12</div>
+<div class="text-xs text-[#2D6A4F] font-semibold mt-1">+2 this week</div>
+</div>
+<div class="bg-white border border-outline-variant p-md rounded-xl hover:shadow-[0_4px_12px_rgba(29,53,87,0.08)] transition-all">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary" data-icon="record_voice_over">record_voice_over</span>
+<span class="font-label-sm uppercase text-slate-500">Interviews</span>
+</div>
+<div class="text-h2 font-h2 text-on-surface">2</div>
+<div class="text-xs text-on-surface-variant font-semibold mt-1">Next: Friday, 10:00 AM</div>
+</div>
+<div class="bg-white border border-outline-variant p-md rounded-xl hover:shadow-[0_4px_12px_rgba(29,53,87,0.08)] transition-all">
+<div class="flex items-center gap-3 mb-2">
+<span class="material-symbols-outlined text-primary" data-icon="visibility">visibility</span>
+<span class="font-label-sm uppercase text-slate-500">Profile Views</span>
+</div>
+<div class="text-h2 font-h2 text-on-surface">45</div>
+<div class="text-xs text-primary font-semibold mt-1">Trending in Kathmandu</div>
+</div>
+</section>
+<!-- Main Dashboard Content (Asymmetric Layout) -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-lg">
+<!-- Recent Applications (Left Side) -->
+<section class="lg:col-span-7 space-y-md">
+<div class="flex items-center justify-between">
+<h3 class="font-h3 text-h3">Recent Applications</h3>
+<a class="text-primary font-semibold text-label-sm" href="#">View All</a>
+</div>
+<!-- App Item 1 -->
+<div class="bg-white border border-outline-variant rounded-xl p-md flex items-center justify-between group hover:border-primary transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="medical_services">medical_services</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface">Health Coordinator</h4>
+<p class="text-sm text-on-surface-variant">Nepal Red Cross Society</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-[#F4A261]/10 border border-[#F4A261] text-[#F4A261] rounded-full text-xs font-semibold">Pending</span>
+</div>
+<!-- App Item 2 -->
+<div class="bg-white border border-outline-variant rounded-xl p-md flex items-center justify-between group hover:border-primary transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="school">school</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface">Primary Grade Teacher</h4>
+<p class="text-sm text-on-surface-variant">Lalitpur Excellence Academy</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-primary/10 border border-primary text-primary rounded-full text-xs font-semibold">Interview</span>
+</div>
+<!-- App Item 3 -->
+<div class="bg-white border border-outline-variant rounded-xl p-md flex items-center justify-between group hover:border-primary transition-colors">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-surface-container rounded-lg flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="emergency">emergency</span>
+</div>
+<div>
+<h4 class="font-semibold text-on-surface">Emergency Response Lead</h4>
+<p class="text-sm text-on-surface-variant">Global Care NGO</p>
+</div>
+</div>
+<span class="px-3 py-1 bg-[#F4A261]/10 border border-[#F4A261] text-[#F4A261] rounded-full text-xs font-semibold">Pending</span>
+</div>
+</section>
+<!-- Recommended Actions / Context (Right Side) -->
+<aside class="lg:col-span-5 space-y-md">
+<div class="bg-primary-container text-white rounded-2xl p-6 relative overflow-hidden">
+<div class="relative z-10">
+<h4 class="text-h3 font-h3 mb-2">Enhance Your Profile</h4>
+<p class="text-sm opacity-90 mb-6">Verified professionals have 4x higher chances of getting hired in healthcare roles.</p>
+<button class="bg-white text-primary px-4 py-2 rounded-lg font-bold text-sm">Upload Credentials</button>
+</div>
+<div class="absolute -right-4 -bottom-4 opacity-10">
+<span class="material-symbols-outlined text-[120px]" data-icon="verified_user" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+</div>
+</div>
+<div class="bg-white border border-outline-variant rounded-xl p-md">
+<h4 class="font-semibold mb-4">Profile Completeness</h4>
+<div class="w-full bg-surface-container rounded-full h-2.5 mb-2">
+<div class="bg-[#2D6A4F] h-2.5 rounded-full" style="width: 85%"></div>
+</div>
+<p class="text-xs text-on-surface-variant">85% Complete. Add your "Volunteer Experience" to reach 100%.</p>
+</div>
+</aside>
+</div>
+<!-- Recommended Jobs (Horizontal Scroll) -->
+<section class="mt-xl mb-base">
+<div class="flex items-center justify-between mb-md">
+<h3 class="font-h3 text-h3">Recommended for You</h3>
+<div class="flex gap-2">
+<button class="p-2 border border-outline-variant rounded-full hover:bg-white active:scale-90"><span class="material-symbols-outlined" data-icon="chevron_left">chevron_left</span></button>
+<button class="p-2 border border-outline-variant rounded-full hover:bg-white active:scale-90"><span class="material-symbols-outlined" data-icon="chevron_right">chevron_right</span></button>
+</div>
+</div>
+<div class="flex gap-md overflow-x-auto pb-4 no-scrollbar -mx-gutter px-gutter">
+<!-- Job Card 1 -->
+<div class="min-w-[320px] bg-white border border-outline-variant rounded-2xl overflow-hidden group hover:shadow-[0_4px_12px_rgba(29,53,87,0.08)] transition-all">
+<div class="h-24 bg-gradient-to-br from-primary to-red-800 relative mountain-pattern">
+<div class="absolute inset-0 opacity-20 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-6xl" data-icon="landscape">landscape</span>
+</div>
+</div>
+<div class="p-md">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-surface-container-low p-2 rounded-lg -mt-10 border-2 border-white">
+<img alt="UN Logo" class="w-10 h-10 rounded" data-alt="A small, professional corporate logo for an international organization, featuring clean typography and a minimalist emblem on a white square background. The style is sharp and modern, suitable for a professional dashboard." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC7ZqCVv8fOVvypSdJ--n4SZamibxkFEpUKedl3XptM9JG77XhmoougHCqUd-BIM6x8CL_5bC6fSHwBp9endwe5exQQb-62Iq4GxG4ywwsSwvXLlygkkrC2otBciMHTIPy51Yi5S4_jarwIjy2lHJQ1CwIZQvVD0GuPrn_gv37PDK-05yN3RYGF3KRTJ3ZOEN84NSx3EADMyj7PhldPBnQ57v0YiN8ZiRi9MZBd5YegURbM7T_1XJiSV-RdJMOVj9dddURWiKI93Jw"/>
+</div>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary transition-colors" data-icon="bookmark">bookmark</span>
+</div>
+<h4 class="font-bold text-on-surface mb-1">Public Health Advisor</h4>
+<p class="text-sm text-on-surface-variant mb-4">United Nations Development • Kathmandu</p>
+<div class="flex gap-2 mb-4">
+<span class="text-xs px-2 py-1 bg-surface-container rounded-md font-semibold">Full-time</span>
+<span class="text-xs px-2 py-1 bg-surface-container rounded-md font-semibold">NPR 80k - 120k</span>
+</div>
+<button class="w-full py-2 bg-primary text-white rounded-lg font-bold text-sm group-hover:bg-primary/90 transition-colors">Apply Now</button>
+</div>
+</div>
+<!-- Job Card 2 -->
+<div class="min-w-[320px] bg-white border border-outline-variant rounded-2xl overflow-hidden group hover:shadow-[0_4px_12px_rgba(29,53,87,0.08)] transition-all">
+<div class="h-24 bg-gradient-to-br from-secondary to-slate-900 relative mountain-pattern">
+<div class="absolute inset-0 opacity-20 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-6xl" data-icon="filter_hdr">filter_hdr</span>
+</div>
+</div>
+<div class="p-md">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-surface-container-low p-2 rounded-lg -mt-10 border-2 border-white">
+<img alt="Teaching Logo" class="w-10 h-10 rounded" data-alt="A minimalist logo for an educational institution, showing a stylized open book and a pen in deep navy blue on a white background. The image is rendered in high resolution with a clean, academic feel." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDYkosDx6-5t_y3yybvtrMSBH1b0sUFiFfeWqmlV1lvbaskc5siAIR3O3F8jhU9H7Z2Frs1RxrUxwXB3eyFk33Nfu8Z8xjZ-ujwCEqeMWA1IHtCQVBLSFyrzGtih80CU9di7pLbmoFkDLg3Lce-THLoG-rs2O-Gi031dWdsTUr5d72dk8Ct18eB1hcwRBT6HrKRUOWa7ytqb8euHuFLOmq4Qyhs2a4VzruA_rbGxxRDZlLWmI7ARz1aU9THw4wdBT8S39MYs4wnatQ"/>
+</div>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary transition-colors" data-icon="bookmark">bookmark</span>
+</div>
+<h4 class="font-bold text-on-surface mb-1">Medical Science Instructor</h4>
+<p class="text-sm text-on-surface-variant mb-4">Tribhuvan Teaching Hospital • Kathmandu</p>
+<div class="flex gap-2 mb-4">
+<span class="text-xs px-2 py-1 bg-surface-container rounded-md font-semibold">Contract</span>
+<span class="text-xs px-2 py-1 bg-surface-container rounded-md font-semibold">NPR 60k - 90k</span>
+</div>
+<button class="w-full py-2 bg-primary text-white rounded-lg font-bold text-sm group-hover:bg-primary/90 transition-colors">Apply Now</button>
+</div>
+</div>
+<!-- Job Card 3 -->
+<div class="min-w-[320px] bg-white border border-outline-variant rounded-2xl overflow-hidden group hover:shadow-[0_4px_12px_rgba(29,53,87,0.08)] transition-all">
+<div class="h-24 bg-gradient-to-br from-[#457B9D] to-[#1D3557] relative mountain-pattern">
+<div class="absolute inset-0 opacity-20 flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-6xl" data-icon="terrain">terrain</span>
+</div>
+</div>
+<div class="p-md">
+<div class="flex justify-between items-start mb-4">
+<div class="bg-surface-container-low p-2 rounded-lg -mt-10 border-2 border-white">
+<img alt="Care Logo" class="w-10 h-10 rounded" data-alt="A modern healthcare logo featuring two abstract hands holding a heart, designed in sky blue and navy tones. The logo is clean, symmetrical, and conveys a sense of professional care and trust." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBUqJzbszclo2HDX3_lPaikaTtPSNuBsCrA3ivlFaPOOkf0Ey_8OFB3rcl24p0G3UvZWMo7gclhWIfWpZrxk_TYNULcuH9plbgi6jgxPZI9OxceHYMRZjfrDKgUebfnOqryTeUTRusKWxSVbtCZ7bFSGq5MSYYCivS8tgjATIbQ1dR8bEzkKDZ3EyGxr1LSRMYXvuTNzOVH_6Cfh50di07ALXl8Rr-T7zz93A3CLdz9D7t10-u9afi0uLVXd9l8shwHkOZxQisuzec"/>
+</div>
+<span class="material-symbols-outlined text-slate-400 cursor-pointer hover:text-primary transition-colors" data-icon="bookmark">bookmark</span>
+</div>
+<h4 class="font-bold text-on-surface mb-1">Clinic Operations Manager</h4>
+<p class="text-sm text-on-surface-variant mb-4">Care Nepal Foundation • Pokhara</p>
+<div class="flex gap-2 mb-4">
+<span class="text-xs px-2 py-1 bg-surface-container rounded-md font-semibold">Full-time</span>
+<span class="text-xs px-2 py-1 bg-surface-container rounded-md font-semibold">NPR 75k - 100k</span>
+</div>
+<button class="w-full py-2 bg-primary text-white rounded-lg font-bold text-sm group-hover:bg-primary/90 transition-colors">Apply Now</button>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- BottomNavBar -->
+<nav class="fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-2 pb-safe py-2 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 shadow-[0_-4px_12px_rgba(29,53,87,0.04)]">
+<a class="flex flex-col items-center justify-center bg-red-50 dark:bg-red-950/30 text-red-600 dark:text-red-400 rounded-xl px-4 py-1 scale-100 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-[11px] font-semibold font-sans">Dashboard</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 p-2 hover:text-red-500 dark:hover:text-red-300 scale-100 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="work">work</span>
+<span class="text-[11px] font-semibold font-sans">Jobs</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 p-2 hover:text-red-500 dark:hover:text-red-300 scale-100 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="account_circle">account_circle</span>
+<span class="text-[11px] font-semibold font-sans">Portfolio</span>
+</a>
+<a class="flex flex-col items-center justify-center text-slate-500 dark:text-slate-400 p-2 hover:text-red-500 dark:hover:text-red-300 scale-100 active:scale-90 transition-all duration-200" href="#">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+<span class="text-[11px] font-semibold font-sans">Alerts</span>
+</a>
+</nav>
+<!-- Contextual FAB -->
+<div class="fixed bottom-24 right-6 md:right-12 z-40">
+<button class="bg-primary text-white w-14 h-14 rounded-full shadow-lg flex items-center justify-center hover:bg-primary/90 transition-all active:scale-90">
+<span class="material-symbols-outlined" data-icon="search">search</span>
+</button>
+</div>
+</body></html>

@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Care Connect Admin - Dashboard</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;family=Inter:wght@400;600&amp;family=Noto+Serif&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .mountain-motif {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M30 5L55 50H5L30 5Z' fill='%23b7102a' fill-opacity='0.03'/%3E%3C/svg%3E");
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 left-0 w-full z-50 bg-gray-50 dark:bg-gray-950 border-b border-gray-200 dark:border-gray-800 flex justify-between items-center px-6 py-4">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-red-600 dark:text-red-500 cursor-pointer">menu</span>
+<h1 class="text-xl font-black text-red-600 dark:text-red-500 uppercase tracking-tighter">Care Connect Nepal</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="h-10 w-10 rounded-full overflow-hidden border border-outline-variant">
+<img class="h-full w-full object-cover" data-alt="A professional profile avatar for an administrator featuring a high-quality portrait of a woman in business attire. The image is set against a clean, bright background with soft studio lighting that creates a modern and trustworthy institutional feel. The color palette is composed of natural skin tones and a soft white backdrop, aligning with the corporate modern aesthetic of the National Reliability design system." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAniNmqB5cNfW_l1wwPfwqj83NoKdSgNicbglfMhVFTQmuBOav_yj2I3_dB9Z3_lzH3khNEJrEd6nNCAUfJPNA7TkCJcg9lOMR0sqZSq2ObbLpAwitUSXHaip82HD9090frwRrc47frVfuc6LsOc8JOk1libgOwwEh316n09XMkpn805G49LfQ7zv1yxfMcZExF8vqLc8pi7J6H7GIolNCGR_D5nKWU-uJVfumsafCos9vbQXNEdzVkKz6-bdzGvb7ypi_9DHD4eeA"/>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer -->
+<aside class="fixed left-0 top-0 h-full z-40 w-72 bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-800 flex flex-col pt-20">
+<div class="px-6 py-4">
+<h2 class="text-lg font-bold text-gray-900 dark:text-white">Care Connect Admin</h2>
+</div>
+<nav class="flex-1 mt-4">
+<!-- Active: Dashboard -->
+<a class="flex items-center gap-3 text-red-600 dark:text-red-400 border-l-4 border-red-600 bg-red-50 dark:bg-red-900/10 px-6 py-3 text-base font-semibold transition-all translate-x-1" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span>Dashboard</span>
+</a>
+<a class="flex items-center gap-3 text-gray-600 dark:text-gray-400 px-6 py-3 border-l-4 border-transparent hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span>Applicants</span>
+</a>
+<a class="flex items-center gap-3 text-gray-600 dark:text-gray-400 px-6 py-3 border-l-4 border-transparent hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span>KYC Review</span>
+</a>
+<a class="flex items-center gap-3 text-gray-600 dark:text-gray-400 px-6 py-3 border-l-4 border-transparent hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span>Settings</span>
+</a>
+</nav>
+<div class="p-6">
+<div class="rounded-lg bg-surface-container p-4 border border-outline-variant mountain-motif">
+<p class="text-label-sm text-primary font-bold">Admin Level 4</p>
+<p class="text-[12px] text-on-surface-variant mt-1">System Health: Optimal</p>
+</div>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-72 pt-24 px-gutter pb-xl min-h-screen">
+<div class="max-w-container-max mx-auto">
+<!-- Header Section -->
+<div class="flex justify-between items-end mb-md">
+<div>
+<h2 class="font-h2 text-h2 text-on-surface">Admin Dashboard</h2>
+<p class="font-body-md text-on-surface-variant">System overview and critical operations for Nepal's care network.</p>
+</div>
+<button class="bg-primary text-on-primary px-6 py-3 rounded-lg font-bold hover:opacity-90 transition-all flex items-center gap-2">
+<span class="material-symbols-outlined">download</span>
+                    Export Reports
+                </button>
+</div>
+<!-- Pending KYC Alert Banner -->
+<div class="mb-md p-md bg-secondary-container rounded-xl border border-outline-variant flex items-center justify-between">
+<div class="flex items-center gap-4">
+<div class="h-12 w-12 rounded-full bg-white flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div>
+<h4 class="font-bold text-on-secondary-container">Action Required: 12 Pending KYC Requests</h4>
+<p class="text-body-md text-on-secondary-container opacity-90">Verify incoming professionals to maintain service reliability standards.</p>
+</div>
+</div>
+<button class="bg-white text-primary border border-primary px-4 py-2 rounded-lg text-label-sm hover:bg-primary hover:text-white transition-colors">
+                    REVIEW NOW
+                </button>
+</div>
+<!-- Stats Grid -->
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-md mb-lg">
+<!-- Stat Card 1 -->
+<div class="bg-white p-md rounded-xl border border-outline-variant mountain-motif shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary p-2 bg-primary-fixed rounded-lg">person</span>
+<span class="text-forest text-[12px] font-bold text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +12%
+                        </span>
+</div>
+<p class="text-label-sm text-on-surface-variant mt-4">Total Users</p>
+<h3 class="text-h3 font-h3 text-on-surface mt-1">4,281</h3>
+</div>
+<!-- Stat Card 2 -->
+<div class="bg-white p-md rounded-xl border border-outline-variant mountain-motif shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary p-2 bg-primary-fixed rounded-lg">corporate_fare</span>
+<span class="text-forest text-[12px] font-bold text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +5%
+                        </span>
+</div>
+<p class="text-label-sm text-on-surface-variant mt-4">Partner NGOs</p>
+<h3 class="text-h3 font-h3 text-on-surface mt-1">86</h3>
+</div>
+<!-- Stat Card 3 -->
+<div class="bg-white p-md rounded-xl border border-outline-variant mountain-motif shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary p-2 bg-primary-fixed rounded-lg">work</span>
+<span class="text-forest text-[12px] font-bold text-tertiary flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">trending_up</span> +24%
+                        </span>
+</div>
+<p class="text-label-sm text-on-surface-variant mt-4">Active Jobs</p>
+<h3 class="text-h3 font-h3 text-on-surface mt-1">312</h3>
+</div>
+<!-- Stat Card 4 -->
+<div class="bg-white p-md rounded-xl border border-outline-variant mountain-motif shadow-sm hover:shadow-md transition-shadow">
+<div class="flex justify-between items-start">
+<span class="material-symbols-outlined text-primary p-2 bg-primary-fixed rounded-lg">verified_user</span>
+<span class="text-saffron text-[12px] font-bold text-on-secondary-fixed-variant flex items-center gap-1">
+<span class="material-symbols-outlined text-sm">schedule</span> Priority
+                        </span>
+</div>
+<p class="text-label-sm text-on-surface-variant mt-4">Pending KYC</p>
+<h3 class="text-h3 font-h3 text-on-surface mt-1">12</h3>
+</div>
+</div>
+<!-- Main Dashboard Layout: Bento Grid -->
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-md">
+<!-- Activity Feed (Left 2 Columns) -->
+<div class="lg:col-span-2 bg-white rounded-xl border border-outline-variant flex flex-col h-full">
+<div class="p-md border-b border-outline-variant flex justify-between items-center">
+<h3 class="font-h3 text-h3 text-on-surface">Real-time Activity Feed</h3>
+<span class="flex items-center gap-2 text-label-sm text-primary">
+<span class="h-2 w-2 rounded-full bg-primary animate-pulse"></span>
+                            LIVE UPDATES
+                        </span>
+</div>
+<div class="p-0 flex-1">
+<!-- Feed Item 1 -->
+<div class="p-md border-b border-outline-variant flex gap-4 hover:bg-surface-container-low transition-colors">
+<div class="h-10 w-10 flex-shrink-0 rounded-full bg-tertiary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">check_circle</span>
+</div>
+<div class="flex-1">
+<p class="text-body-md text-on-surface"><span class="font-bold">Binod Chaudhary</span> from Kathmandu successfully verified KYC documents.</p>
+<p class="text-label-sm text-on-surface-variant mt-1">2 minutes ago • ID: 88219</p>
+</div>
+</div>
+<!-- Feed Item 2 -->
+<div class="p-md border-b border-outline-variant flex gap-4 hover:bg-surface-container-low transition-colors">
+<div class="h-10 w-10 flex-shrink-0 rounded-full bg-primary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-primary">campaign</span>
+</div>
+<div class="flex-1">
+<p class="text-body-md text-on-surface"><span class="font-bold">Heifer International</span> posted 3 new nursing opportunities in Pokhara.</p>
+<p class="text-label-sm text-on-surface-variant mt-1">15 minutes ago • NGO: HEI-02</p>
+</div>
+</div>
+<!-- Feed Item 3 -->
+<div class="p-md border-b border-outline-variant flex gap-4 hover:bg-surface-container-low transition-colors">
+<div class="h-10 w-10 flex-shrink-0 rounded-full bg-secondary-fixed flex items-center justify-center">
+<span class="material-symbols-outlined text-secondary">login</span>
+</div>
+<div class="flex-1">
+<p class="text-body-md text-on-surface">System Login: <span class="font-bold">Admin_Sujata</span> accessed the payroll module.</p>
+<p class="text-label-sm text-on-surface-variant mt-1">42 minutes ago • IP: 192.168.1.45</p>
+</div>
+</div>
+<!-- Feed Item 4 -->
+<div class="p-md flex gap-4 hover:bg-surface-container-low transition-colors">
+<div class="h-10 w-10 flex-shrink-0 rounded-full bg-on-tertiary-container flex items-center justify-center">
+<span class="material-symbols-outlined text-tertiary">person_add</span>
+</div>
+<div class="flex-1">
+<p class="text-body-md text-on-surface"><span class="font-bold">Anju Shrestha</span> registered as a Skilled Professional.</p>
+<p class="text-label-sm text-on-surface-variant mt-1">1 hour ago • District: Lalitpur</p>
+</div>
+</div>
+</div>
+<div class="p-4 bg-gray-50 rounded-b-xl text-center">
+<button class="text-primary font-bold text-label-sm hover:underline">VIEW ALL ACTIVITY</button>
+</div>
+</div>
+<!-- KYC Verification Queue (Right 1 Column) -->
+<div class="bg-white rounded-xl border border-outline-variant overflow-hidden flex flex-col">
+<div class="p-md border-b border-outline-variant">
+<h3 class="font-h3 text-h3 text-on-surface">Urgent Verifications</h3>
+</div>
+<div class="flex-1">
+<!-- Pending KYC 1 -->
+<div class="p-md border-b border-outline-variant">
+<div class="flex items-center gap-3 mb-2">
+<div class="h-8 w-8 rounded-full bg-sky-200 flex items-center justify-center overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="A portrait of a male healthcare professional from Nepal, dressed in a clean medical tunic. The photograph is shot with high-end digital clarity, featuring professional lighting that emphasizes reliability and medical expertise. The background is a soft, out-of-focus hospital environment in light mode tones, following the Corporate Modern brand aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuBqDpsT2NltUI8NJGhy9g3AkjN2at6gxMwaV4RFtYcjMLsEhuVNiLS4sAQJIxc8Bz3flYT_6n5Yi_BSaWH0DdU0rX1Dy1TscAqOEC6QbySZz43FZaRAcD2vnps6sMxfzgvg7OwPoXHXZjQipInKvc0B86ZB_a_E5R4Q3S_-Et4WVV_hCxc3P_NJ6mAZV3tLzlPJ4akcQqgh8pMmS0n3u-laHmeA0hyJxhXAQGhT_9hbZjk4gy8HCbl8rHafmRn7dVxYolomDTdCgn4"/>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Ramesh Thapa</p>
+<p class="text-[12px] text-on-surface-variant">Senior Physiotherapist</p>
+</div>
+<span class="px-2 py-1 bg-surface-container-high text-on-secondary-fixed-variant rounded text-[10px] font-bold">PENDING</span>
+</div>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 py-2 text-white bg-tertiary rounded text-[12px] font-bold hover:bg-tertiary-container transition-colors">VERIFY</button>
+<button class="flex-1 py-2 text-primary border border-primary rounded text-[12px] font-bold hover:bg-primary-fixed transition-colors">REJECT</button>
+</div>
+</div>
+<!-- Pending KYC 2 -->
+<div class="p-md border-b border-outline-variant">
+<div class="flex items-center gap-3 mb-2">
+<div class="h-8 w-8 rounded-full bg-sky-200 flex items-center justify-center overflow-hidden">
+<img class="h-full w-full object-cover" data-alt="A close-up portrait of a female doctor in Nepal, wearing a white lab coat and stethoscope. The lighting is crisp and modern, highlighting an expression of compassionate authority. The visual style is polished and professional, fitting an institutional job network interface, with a color palette of clean whites and medical blues." src="https://lh3.googleusercontent.com/aida-public/AB6AXuC-pqPMxZ06gE7W-KgDyRILNR--xyFWl7h-LgoHHezyidsVGPRI-iXvKiTVxb0C9uW5wsySIrUSRQNxwzkVbJqwg0kwVjNKCcUvN8OwttKTcP2v4c1TTKXPR61qkq54Fm7HCziYSbrNUei5WBToadwEHkegMH4xz-L3ca4-ezx-Brw2cD7qfAaIPK_Jfdll0OJDoQLnMqdTSjeXNs0bUylsDaLlnP4xt23diJJJ5lf6mVXvi8yPS9ftBmav-w3_aV22fi7chitysWI"/>
+</div>
+<div class="flex-1">
+<p class="font-bold text-on-surface">Sita Rai</p>
+<p class="text-[12px] text-on-surface-variant">Registered Nurse</p>
+</div>
+<span class="px-2 py-1 bg-surface-container-high text-on-secondary-fixed-variant rounded text-[10px] font-bold">PENDING</span>
+</div>
+<div class="flex gap-2 mt-4">
+<button class="flex-1 py-2 text-white bg-tertiary rounded text-[12px] font-bold hover:bg-tertiary-container transition-colors">VERIFY</button>
+<button class="flex-1 py-2 text-primary border border-primary rounded text-[12px] font-bold hover:bg-primary-fixed transition-colors">REJECT</button>
+</div>
+</div>
+</div>
+<div class="p-gutter mountain-motif bg-surface-container-low text-center">
+<p class="text-label-sm text-on-surface-variant italic font-normal">All pending verifications must be completed within 24 hours of submission per SLA-3.</p>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-white/90 dark:bg-gray-900/90 backdrop-blur-md border-t border-gray-200 dark:border-gray-800 shadow-[0_-4px_12px_rgba(29,53,87,0.05)] rounded-t-xl">
+<a class="flex flex-col items-center justify-center text-red-600 dark:text-red-400 bg-red-50/50 dark:bg-red-900/20 rounded-xl p-2 transition-all scale-90" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 p-2" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-bold uppercase tracking-widest mt-1">People</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 p-2" href="#">
+<span class="material-symbols-outlined">verified_user</span>
+<span class="text-[10px] font-bold uppercase tracking-widest mt-1">Verify</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 dark:text-gray-400 p-2" href="#">
+<span class="material-symbols-outlined">menu</span>
+<span class="text-[10px] font-bold uppercase tracking-widest mt-1">More</span>
+</a>
+</nav>
+</body></html>

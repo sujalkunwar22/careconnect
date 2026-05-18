@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+
+<html class="light" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>KYC Review - Care Connect Nepal</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&amp;family=Inter:wght@400;600&amp;family=Noto+Serif&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "surface-variant": "#f9dcda",
+                        "primary-fixed": "#ffdad8",
+                        "inverse-surface": "#3e2c2b",
+                        "on-tertiary-container": "#f3fffc",
+                        "surface-container-highest": "#f9dcda",
+                        "inverse-on-surface": "#ffedeb",
+                        "surface-dim": "#f1d3d2",
+                        "on-tertiary-fixed": "#00201d",
+                        "on-surface": "#271717",
+                        "secondary-container": "#bbd3fd",
+                        "outline-variant": "#e4bebc",
+                        "on-secondary-fixed": "#001b3c",
+                        "error-container": "#ffdad6",
+                        "primary-fixed-dim": "#ffb3b1",
+                        "on-error": "#ffffff",
+                        "on-background": "#271717",
+                        "tertiary-fixed": "#8cf4e8",
+                        "secondary-fixed": "#d5e3ff",
+                        "on-error-container": "#93000a",
+                        "surface-container-low": "#fff0ef",
+                        "primary": "#b7102a",
+                        "background": "#fff8f7",
+                        "primary-container": "#db313f",
+                        "secondary": "#485f84",
+                        "on-primary": "#ffffff",
+                        "surface-container": "#ffe9e8",
+                        "inverse-primary": "#ffb3b1",
+                        "surface-container-high": "#ffe1e0",
+                        "surface-container-lowest": "#ffffff",
+                        "secondary-fixed-dim": "#b0c7f1",
+                        "tertiary": "#006860",
+                        "outline": "#8f6f6e",
+                        "tertiary-fixed-dim": "#6fd8cc",
+                        "on-tertiary-fixed-variant": "#00504a",
+                        "on-surface-variant": "#5b403f",
+                        "error": "#ba1a1a",
+                        "surface-tint": "#bb152c",
+                        "on-secondary": "#ffffff",
+                        "on-secondary-fixed-variant": "#30476a",
+                        "surface": "#fff8f7",
+                        "tertiary-container": "#008379",
+                        "on-tertiary": "#ffffff",
+                        "surface-bright": "#fff8f7",
+                        "on-primary-container": "#fffbff",
+                        "on-primary-fixed": "#410007",
+                        "on-secondary-container": "#445a7f",
+                        "on-primary-fixed-variant": "#92001c"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    "spacing": {
+                        "xs": "4px",
+                        "gutter": "24px",
+                        "container-max": "1280px",
+                        "base": "8px",
+                        "lg": "48px",
+                        "xl": "80px",
+                        "sm": "12px",
+                        "md": "24px"
+                    },
+                    "fontFamily": {
+                        "body-md": ["Inter"],
+                        "h2": ["Poppins"],
+                        "h1": ["Poppins"],
+                        "body-lg": ["Inter"],
+                        "label-sm": ["Inter"],
+                        "h3": ["Poppins"],
+                        "quote-accent": ["Noto Serif"]
+                    },
+                    "fontSize": {
+                        "body-md": ["16px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "h2": ["32px", {"lineHeight": "1.3", "fontWeight": "600"}],
+                        "h1": ["48px", {"lineHeight": "1.2", "fontWeight": "700"}],
+                        "body-lg": ["18px", {"lineHeight": "1.6", "fontWeight": "400"}],
+                        "label-sm": ["13px", {"lineHeight": "1", "letterSpacing": "0.05em", "fontWeight": "600"}],
+                        "h3": ["24px", {"lineHeight": "1.4", "fontWeight": "600"}],
+                        "quote-accent": ["20px", {"lineHeight": "1.5", "fontWeight": "400"}]
+                    }
+                },
+            },
+        }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .mountain-motif {
+            background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M0 60 L30 0 L60 60 Z' fill='%23b7102a' fill-opacity='0.03'/%3E%3C/svg%3E");
+        }
+    </style>
+<style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+  </style>
+  </head>
+<body class="bg-surface font-body-md text-on-surface">
+<!-- TopAppBar -->
+<header class="fixed top-0 z-50 w-full flex justify-between items-center px-6 py-4 bg-gray-50 border-b border-gray-200">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-red-600">menu</span>
+<h1 class="text-xl font-black text-red-600 uppercase tracking-tighter">Care Connect Nepal</h1>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-10 h-10 rounded-full bg-secondary-container flex items-center justify-center overflow-hidden border border-outline-variant">
+<svg fill="none" height="40" viewbox="0 0 40 40" width="40" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#bbd3fd" height="40" width="40"></rect>
+<path d="M20 0L37.3205 30H2.67949L20 0Z" fill="#30476a" fill-opacity="0.2"></path>
+<path d="M10 20L27.3205 50H-7.32051L10 20Z" fill="#30476a" fill-opacity="0.1"></path>
+</svg>
+</div>
+</div>
+</header>
+<!-- NavigationDrawer (Desktop Only) -->
+<aside class="hidden md:flex fixed left-0 top-0 h-full z-40 w-72 flex-col pt-20 bg-white border-r border-gray-200">
+<div class="px-6 py-4 mb-4">
+<h2 class="text-lg font-bold text-gray-900">Care Connect Admin</h2>
+</div>
+<nav class="flex-1">
+<a class="text-gray-600 px-4 py-3 border-l-4 border-transparent flex items-center gap-3 hover:bg-gray-50 transition-all" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+<span class="text-base font-semibold">Dashboard</span>
+</a>
+<a class="text-gray-600 px-4 py-3 border-l-4 border-transparent flex items-center gap-3 hover:bg-gray-50 transition-all" href="#">
+<span class="material-symbols-outlined">groups</span>
+<span class="text-base font-semibold">Applicants</span>
+</a>
+<a class="text-red-600 border-l-4 border-red-600 bg-red-50 px-4 py-3 flex items-center gap-3 transition-all translate-x-1" href="#">
+<span class="material-symbols-outlined">fact_check</span>
+<span class="text-base font-semibold">KYC Review</span>
+</a>
+<a class="text-gray-600 px-4 py-3 border-l-4 border-transparent flex items-center gap-3 hover:bg-gray-50 transition-all" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="text-base font-semibold">Settings</span>
+</a>
+</nav>
+</aside>
+<!-- Main Content Canvas -->
+<main class="pt-24 pb-20 md:pb-8 md:pl-72 min-h-screen">
+<div class="max-w-container-max mx-auto px-gutter py-base">
+<!-- Page Header -->
+<div class="flex flex-col md:flex-row md:items-end justify-between gap-4 mb-8">
+<div>
+<nav class="flex items-center gap-2 text-label-sm text-outline mb-2">
+<span class="uppercase">Verification</span>
+<span class="material-symbols-outlined text-[16px]">chevron_right</span>
+<span class="uppercase">Request #KYC-99281</span>
+</nav>
+<h2 class="font-h2 text-h2 text-on-surface">KYC Review: Arjun Thapa</h2>
+</div>
+<div class="flex items-center gap-3">
+<span class="px-4 py-1.5 rounded-full border border-[#F4A261] text-[#F4A261] bg-[#F4A261]/10 text-label-sm flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">pending</span> Pending Review
+                    </span>
+</div>
+</div>
+<!-- Bento Grid Interface -->
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-6">
+<!-- Left Column: Applicant Profile (4 cols) -->
+<div class="lg:col-span-4 space-y-6">
+<section class="bg-white border border-outline-variant rounded-xl p-6 mountain-motif">
+<div class="flex items-center gap-4 mb-6">
+<div class="w-16 h-16 rounded-xl bg-primary-fixed flex items-center justify-center border border-outline-variant">
+<svg fill="none" height="64" viewbox="0 0 64 64" width="64" xmlns="http://www.w3.org/2000/svg">
+<rect fill="#ffdad8" height="64" width="64"></rect>
+<circle cx="32" cy="24" fill="#b7102a" fill-opacity="0.2" r="12"></circle>
+<path d="M12 52C12 41 21 36 32 36C43 36 52 41 52 52" stroke="#b7102a" stroke-opacity="0.4" stroke-width="2"></path>
+</svg>
+</div>
+<div>
+<h3 class="font-h3 text-h3">Arjun Thapa</h3>
+<p class="text-on-surface-variant text-label-sm">Joined 12 Oct 2023</p>
+</div>
+</div>
+<div class="space-y-4">
+<div class="pb-4 border-b border-surface-variant">
+<p class="text-label-sm text-outline uppercase mb-1">Full Name</p>
+<p class="font-semibold">Arjun Bahadur Thapa</p>
+</div>
+<div class="pb-4 border-b border-surface-variant">
+<p class="text-label-sm text-outline uppercase mb-1">Date of Birth</p>
+<p class="font-semibold">15 July 1988 (35 Years)</p>
+</div>
+<div class="pb-4 border-b border-surface-variant">
+<p class="text-label-sm text-outline uppercase mb-1">Citizenship Number</p>
+<p class="font-semibold">27-01-75-12930</p>
+</div>
+<div class="pb-4 border-b border-surface-variant">
+<p class="text-label-sm text-outline uppercase mb-1">District of Issue</p>
+<p class="font-semibold">Kaski, Nepal</p>
+</div>
+<div>
+<p class="text-label-sm text-outline uppercase mb-1">Contact Details</p>
+<p class="font-semibold flex items-center gap-2"><span class="material-symbols-outlined text-sm">mail</span> arjun.thapa@example.com</p>
+<p class="font-semibold flex items-center gap-2 mt-1"><span class="material-symbols-outlined text-sm">call</span> +977 980-0000000</p>
+</div>
+</div>
+</section>
+<!-- Checklist -->
+<section class="bg-white border border-outline-variant rounded-xl p-6">
+<h4 class="font-bold text-label-sm uppercase text-outline mb-4">Verification Checklist</h4>
+<div class="space-y-3">
+<label class="flex items-center gap-3 p-3 rounded-lg bg-surface hover:bg-surface-container transition-colors cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium group-hover:text-primary transition-colors">ID data matches profile</span>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-lg bg-surface hover:bg-surface-container transition-colors cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium group-hover:text-primary transition-colors">Photo clear &amp; legible</span>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-lg bg-surface hover:bg-surface-container transition-colors cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium group-hover:text-primary transition-colors">Security features visible</span>
+</label>
+<label class="flex items-center gap-3 p-3 rounded-lg bg-surface hover:bg-surface-container transition-colors cursor-pointer group">
+<input class="w-5 h-5 rounded border-outline text-primary focus:ring-primary" type="checkbox"/>
+<span class="text-sm font-medium group-hover:text-primary transition-colors">Selfie matches ID photo</span>
+</label>
+</div>
+</section>
+</div>
+<!-- Right Column: Document Review (8 cols) -->
+<div class="lg:col-span-8 space-y-6">
+<!-- Main Preview Surface -->
+<div class="bg-white border border-outline-variant rounded-xl overflow-hidden">
+<div class="flex items-center justify-between px-6 py-4 border-b border-outline-variant bg-gray-50">
+<div class="flex gap-4">
+<button class="px-4 py-2 bg-white border border-outline-variant rounded-lg text-sm font-bold text-primary flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">badge</span> Front
+                                </button>
+<button class="px-4 py-2 text-on-surface-variant hover:bg-white transition-all rounded-lg text-sm font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">badge</span> Back
+                                </button>
+<button class="px-4 py-2 text-on-surface-variant hover:bg-white transition-all rounded-lg text-sm font-medium flex items-center gap-2">
+<span class="material-symbols-outlined text-[18px]">portrait</span> Selfie with ID
+                                </button>
+</div>
+<div class="flex gap-2">
+<button class="p-2 rounded-lg border border-outline-variant hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">zoom_in</span>
+</button>
+<button class="p-2 rounded-lg border border-outline-variant hover:bg-surface-container transition-all">
+<span class="material-symbols-outlined">rotate_right</span>
+</button>
+</div>
+</div>
+<div class="aspect-[16/10] w-full bg-gray-100 flex items-center justify-center p-8">
+<div class="relative w-full h-full rounded-lg shadow-2xl border-4 border-white overflow-hidden group">
+<img class="w-full h-full object-cover" data-alt="A high-fidelity close-up of a national identification card from Nepal resting on a professional gray textured surface. The document features intricate patterns, a small portrait of a man, and official government seals. The lighting is bright and uniform, emphasizing clarity and security details for administrative review. The overall mood is serious, professional, and corporate modern with a clean aesthetic." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAbydAAHkR-QhASmJiXX27a_S6YvDVahIT7d5PtJHub3EovRKw8UyHk99WL7oZKzLMJqgPQEs94FrpsGM4szJQM3EP_JXr-Q2EAIARu9q8pXRQSRAqHnWhKIeJINoQa4VXeZmk1Q5YJYiADkhXCPfClA9FXR4Dkz_FOg_1HtFPTicGwN8Yzwc5uqVcXpfO7O1hfBlOXR8lzACNbYu3J4LLJ4k7mR6qiYk0P3eGBw7b7JUrzZTrgWGn2njiKgkZyAowSKEZZvWyOIaI"/>
+<div class="absolute inset-0 bg-black/40 opacity-0 group-hover:opacity-100 transition-opacity flex items-center justify-center">
+<button class="bg-white text-on-surface px-6 py-3 rounded-xl font-bold flex items-center gap-2">
+<span class="material-symbols-outlined">fullscreen</span> Open Full Resolution
+                                    </button>
+</div>
+</div>
+</div>
+</div>
+<!-- Thumbnails Row -->
+<div class="grid grid-cols-3 gap-4">
+<div class="aspect-video bg-white border-2 border-primary rounded-xl overflow-hidden cursor-pointer relative">
+<img class="w-full h-full object-cover opacity-80" data-alt="A small preview thumbnail showing the front of a citizenship identification card. The card is positioned centered with soft studio lighting. The brand colors of white and red are subtly present in the document's design. The aesthetic is focused on reliability and institutional trust, presented in a clean digital interface." src="https://lh3.googleusercontent.com/aida-public/AB6AXuANHz6w285nsrfLV44ZjlV3NYbaomujNWpS_ADmXIceEfzNSKorQrpZgbiex5lKR5H1SCSYV__s-faCpa5O-nzOFaRj1qO20uvJkGtGjzGNhLB6-Advkr4NexS4nyty6R1VRjrkwzL-qvFI3t5J2drc6_TlL3hk-5FsDVApXtrMVWbp53UWoGVqaGkH_WcU9X8VS_7vMOacC251-W-GTiHUGJtxpjgqrDYMceyEzWVGAmI1lGhOawL-1mCgzcREgNsWs0ifiqW17OI"/>
+<div class="absolute bottom-2 left-2 px-2 py-1 bg-primary text-white text-[10px] rounded uppercase font-bold">Active</div>
+</div>
+<div class="aspect-video bg-white border border-outline-variant rounded-xl overflow-hidden cursor-pointer hover:border-outline transition-all">
+<img class="w-full h-full object-cover" data-alt="A thumbnail preview of the backside of a government issued identity document. The background is a flat, professional neutral tone. The lighting creates no glares, ensuring all text and stamps are clearly visible for a security reviewer. The visual style is minimal and functional, adhering to corporate modern design principles." src="https://lh3.googleusercontent.com/aida-public/AB6AXuAzBE1AJwaty7OG2seCjLHE__J5rZmmbV4AJVLd6mZArvdNcj0JMGZ2BuyvUFGvItU48E5BZ5IDaYCBt3dvkD9xewIB3FrN9rFwSMEG8OynEvOVcJFQKyt8FCyZtNgzhGBo2hsC2Qansp0rRoPK_o1sZqnxso1iF3yVe36ZXFath92goOVBQPeX0Z0jGoHbXNHIIVSCMouZYUyDFW_i9R2EfsJbU4Ln9m9dZCIzgEkeiQ1dk9bzw65LJQ9hvirvpn7M9qmbQx8txnk"/>
+</div>
+<div class="aspect-video bg-white border border-outline-variant rounded-xl overflow-hidden cursor-pointer hover:border-outline transition-all">
+<img class="w-full h-full object-cover" data-alt="A professional selfie of a Nepali man holding his identification card next to his face for identity verification. The background is a plain white wall with soft, natural lighting. The focus is sharp on both the individual and the ID card, symbolizing security and personal growth. The overall aesthetic is clean, professional, and trustworthy." src="https://lh3.googleusercontent.com/aida-public/AB6AXuDZje51BT_hLMTWw9tVQZml0USDUIEAE53pRYtS_8CplFtfV6pGpowSnBZsUz_xJgL8GrhEno_ZH3Zg5nCVmwxv9WWvrIUkvMEe6sRQg6sMqapUdYEg0Xswib208Jtsjj8zT_5oV0jXU0_wjpPMf6M7IUDFDrjTn7r9NIuYknUMb45yzUdxTjTergEfnl5WW0Pk1pzNGxs84kW8NSIWxejMwQ9yyo3qUqkeNnaOaGEve20RqwtyNN36mQJmyIVfLUGzqgOpi_-FwBA"/>
+</div>
+</div>
+<!-- Action Bar -->
+<div class="bg-white border border-outline-variant rounded-xl p-6 flex flex-wrap items-center justify-between gap-4">
+<div class="flex flex-wrap gap-3">
+<button class="px-6 py-3 bg-[#2D6A4F] text-white rounded-lg font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">check_circle</span> Approve Applicant
+                            </button>
+<button class="px-6 py-3 bg-[#F4A261] text-white rounded-lg font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">error</span> Request More Info
+                            </button>
+</div>
+<button class="px-6 py-3 bg-[#ba1a1a] text-white rounded-lg font-bold flex items-center gap-2 hover:opacity-90 active:scale-95 transition-all">
+<span class="material-symbols-outlined">cancel</span> Reject Application
+                        </button>
+</div>
+<!-- Internal Admin Notes -->
+<div class="bg-surface-container-low rounded-xl p-6 border border-outline-variant">
+<h4 class="text-label-sm font-bold uppercase text-outline mb-4">Admin Audit Notes</h4>
+<textarea class="w-full h-24 bg-white border border-outline-variant rounded-lg p-4 text-sm focus:ring-2 focus:ring-primary focus:border-primary" placeholder="Enter review notes here... (e.g. 'Waiting for higher res back photo')"></textarea>
+<div class="flex justify-end mt-4">
+<button class="text-sm font-bold text-primary hover:underline">Save internal note</button>
+</div>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- BottomNavBar (Mobile Only) -->
+<nav class="md:hidden fixed bottom-0 left-0 w-full z-50 flex justify-around items-center px-4 py-2 pb-safe bg-white/90 backdrop-blur-md border-t border-gray-200">
+<a class="flex flex-col items-center justify-center text-gray-500 p-2" href="#">
+<span class="material-symbols-outlined">home</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Home</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 p-2" href="#">
+<span class="material-symbols-outlined">group</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">People</span>
+</a>
+<a class="flex flex-col items-center justify-center text-red-600 bg-red-50/50 rounded-xl p-2" href="#">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">verified_user</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">Verify</span>
+</a>
+<a class="flex flex-col items-center justify-center text-gray-500 p-2" href="#">
+<span class="material-symbols-outlined">menu</span>
+<span class="text-[10px] font-bold uppercase tracking-widest">More</span>
+</a>
+</nav>
+</body></html>
