@@ -103,32 +103,33 @@ const PortfolioScreen = ({ navigation }) => {
                 <View style={styles.avatarFallback}>
                   <Text style={styles.avatarInitial}>{(user?.full_name || user?.username || 'U').charAt(0)}</Text>
                 </View>
-              )}{(() => {
-              const status = String(user?.kyc_status || '').toLowerCase();
-              const isVerified = user?.is_kyc_verified || ['verified', 'approved'].includes(status);
-              
-              if (isVerified) {
-                return (
-                  <View style={[styles.verifiedDot, { backgroundColor: '#10B981' }]}>
-                    <ShieldCheck size={12} color="#fff" />
-                  </View>
-                );
-              } else if (['pending', 'submitted', 'in_review'].includes(status)) {
-                return (
-                  <View style={[styles.verifiedDot, { backgroundColor: '#F59E0B' }]}>
-                    <Clock size={10} color="#fff" />
-                  </View>
-                );
-              } else if (['rejected', 'failed', 'info_requested'].includes(status)) {
-                return (
-                  <View style={[styles.verifiedDot, { backgroundColor: '#EF4444' }]}>
-                    <AlertTriangle size={10} color="#fff" />
-                  </View>
-                );
-              } else {
-                return null;
-              }
-            })()}
+              )}
+              {(() => {
+                const status = String(user?.kyc_status || '').toLowerCase();
+                const isVerified = user?.is_kyc_verified || ['verified', 'approved'].includes(status);
+                
+                if (isVerified) {
+                  return (
+                    <View style={[styles.verifiedDot, { backgroundColor: '#10B981' }]}>
+                      <ShieldCheck size={12} color="#fff" />
+                    </View>
+                  );
+                } else if (['pending', 'submitted', 'in_review'].includes(status)) {
+                  return (
+                    <View style={[styles.verifiedDot, { backgroundColor: '#F59E0B' }]}>
+                      <Clock size={10} color="#fff" />
+                    </View>
+                  );
+                } else if (['rejected', 'failed', 'info_requested'].includes(status)) {
+                  return (
+                    <View style={[styles.verifiedDot, { backgroundColor: '#EF4444' }]}>
+                      <AlertTriangle size={10} color="#fff" />
+                    </View>
+                  );
+                } else {
+                  return null;
+                }
+              })()}
             </View>
             <TouchableOpacity
               style={styles.editBtn}
@@ -140,46 +141,47 @@ const PortfolioScreen = ({ navigation }) => {
 
           <View style={styles.profileMeta}>
             <View style={styles.nameRow}>
-              <Text style={styles.userName}>{user?.full_name || user?.username || 'Care Professional'}</Text>{(() => {
-              const status = String(user?.kyc_status || '').toLowerCase();
-              const isVerified = user?.is_kyc_verified || ['verified', 'approved'].includes(status);
-              
-              if (isVerified) {
-                return (
-                  <View style={[styles.verifiedBadge, { backgroundColor: '#10B981' }]}>
-                    <CheckCircle2 size={11} color="#fff" />
-                    <Text style={styles.verifiedBadgeText}>VERIFIED</Text>
-                  </View>
-                );
-              } else if (['pending', 'submitted', 'in_review'].includes(status)) {
-                return (
-                  <View style={[styles.verifiedBadge, { backgroundColor: '#F59E0B' }]}>
-                    <Clock size={11} color="#fff" />
-                    <Text style={styles.verifiedBadgeText}>IN REVIEW</Text>
-                  </View>
-                );
-              } else if (['rejected', 'failed', 'info_requested'].includes(status)) {
-                return (
-                  <TouchableOpacity 
-                    onPress={() => navigation.navigate('KycSubmit')}
-                    style={[styles.verifiedBadge, { backgroundColor: '#EF4444' }]}
-                  >
-                    <AlertTriangle size={11} color="#fff" />
-                    <Text style={styles.verifiedBadgeText}>{status === 'info_requested' ? 'FIX NEEDED' : 'REJECTED'}</Text>
-                  </TouchableOpacity>
-                );
-              } else {
-                return (
-                  <TouchableOpacity 
-                    onPress={() => navigation.navigate('KycSubmit')}
-                    style={[styles.verifiedBadge, { backgroundColor: '#94A3B8' }]}
-                  >
-                    <AlertTriangle size={11} color="#fff" />
-                    <Text style={styles.verifiedBadgeText}>UNVERIFIED</Text>
-                  </TouchableOpacity>
-                );
-              }
-            })()}
+              <Text style={styles.userName}>{user?.full_name || user?.username || 'Care Professional'}</Text>
+              {(() => {
+                const status = String(user?.kyc_status || '').toLowerCase();
+                const isVerified = user?.is_kyc_verified || ['verified', 'approved'].includes(status);
+                
+                if (isVerified) {
+                  return (
+                    <View style={[styles.verifiedBadge, { backgroundColor: '#10B981' }]}>
+                      <CheckCircle2 size={11} color="#fff" />
+                      <Text style={styles.verifiedBadgeText}>VERIFIED</Text>
+                    </View>
+                  );
+                } else if (['pending', 'submitted', 'in_review'].includes(status)) {
+                  return (
+                    <View style={[styles.verifiedBadge, { backgroundColor: '#F59E0B' }]}>
+                      <Clock size={11} color="#fff" />
+                      <Text style={styles.verifiedBadgeText}>IN REVIEW</Text>
+                    </View>
+                  );
+                } else if (['rejected', 'failed', 'info_requested'].includes(status)) {
+                  return (
+                    <TouchableOpacity 
+                      onPress={() => navigation.navigate('KycSubmit')}
+                      style={[styles.verifiedBadge, { backgroundColor: '#EF4444' }]}
+                    >
+                      <AlertTriangle size={11} color="#fff" />
+                      <Text style={styles.verifiedBadgeText}>{status === 'info_requested' ? 'FIX NEEDED' : 'REJECTED'}</Text>
+                    </TouchableOpacity>
+                  );
+                } else {
+                  return (
+                    <TouchableOpacity 
+                      onPress={() => navigation.navigate('KycSubmit')}
+                      style={[styles.verifiedBadge, { backgroundColor: '#94A3B8' }]}
+                    >
+                      <AlertTriangle size={11} color="#fff" />
+                      <Text style={styles.verifiedBadgeText}>UNVERIFIED</Text>
+                    </TouchableOpacity>
+                  );
+                }
+              })()}
             </View>
             <Text style={styles.profession}>{user?.professional_title || 'Healthcare Professional'}</Text>
             <View style={styles.metaRow}>
@@ -265,12 +267,15 @@ const PortfolioScreen = ({ navigation }) => {
                   <Text style={styles.expTitle}>{exp.job_title || exp.title}</Text>
                   <Text style={styles.expCompany}>{exp.organization || exp.company}</Text>
                   <Text style={styles.expPeriod}>{exp.period}</Text>
-                  {exp.bullets?.map((bullet, bIdx) => (
-                    <View key={bIdx} style={styles.bulletRow}>
-                      <CheckCircle2 size={14} color={COLORS.success} />
-                      <Text style={styles.bulletText}>{bullet}</Text>
-                    </View>
-                  ))}
+                   {(() => {
+                    const bulletsList = exp.bullets || (exp.description ? exp.description.split('\n').map(b => b.trim()).filter(Boolean) : []);
+                    return bulletsList.map((bullet, bIdx) => (
+                      <View key={bIdx} style={styles.bulletRow}>
+                        <CheckCircle2 size={14} color={COLORS.success} />
+                        <Text style={styles.bulletText}>{bullet}</Text>
+                      </View>
+                    ));
+                  })()}
                 </View>
               </View>
             </View>
