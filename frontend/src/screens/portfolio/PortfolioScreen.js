@@ -363,10 +363,10 @@ const styles = StyleSheet.create({
   backBtn: {
     width: 40,
     height: 40,
+    backgroundColor: COLORS.surfaceContainer,
     borderRadius: 20,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: COLORS.background,
   },
   headerTitle: {
     fontSize: 18,

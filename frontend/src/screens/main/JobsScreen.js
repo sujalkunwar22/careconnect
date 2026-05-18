@@ -76,7 +76,14 @@ const JobsScreen = ({ navigation }) => {
       <TouchableOpacity
         key={item.id}
         onPress={() => navigation.navigate('JobDetail', { jobId: item.id, jobData: item })}
-        className="bg-white rounded-[24px] p-5 mb-4 border border-slate-100 shadow-sm"
+        className="bg-white rounded-[24px] p-5 mb-4 border border-slate-100"
+        style={{
+          shadowColor: '#0f172a',
+          shadowOffset: { width: 0, height: 2 },
+          shadowOpacity: 0.05,
+          shadowRadius: 4,
+          elevation: 2,
+        }}
         activeOpacity={0.7}
       >
         <View className="flex-row items-start">
@@ -128,7 +135,12 @@ const JobsScreen = ({ navigation }) => {
         <View className="flex-row items-center mb-6">
           <TouchableOpacity
             onPress={() => navigation.goBack()}
-            className="w-10 h-10 items-center justify-center bg-white/20 rounded-full border border-white/30 mr-3"
+            className="w-10 h-10 items-center justify-center rounded-full mr-3"
+            style={{
+              backgroundColor: 'rgba(255, 255, 255, 0.2)',
+              borderColor: 'rgba(255, 255, 255, 0.3)',
+              borderWidth: 1,
+            }}
           >
             <ArrowLeft size={22} color="#ffffff" />
           </TouchableOpacity>
@@ -140,7 +152,12 @@ const JobsScreen = ({ navigation }) => {
           </View>
           {isAuthenticated && (
             <TouchableOpacity
-              className="w-12 h-12 bg-white/20 rounded-2xl items-center justify-center border border-white/30"
+              className="w-12 h-12 rounded-2xl items-center justify-center"
+              style={{
+                backgroundColor: 'rgba(255, 255, 255, 0.2)',
+                borderColor: 'rgba(255, 255, 255, 0.3)',
+                borderWidth: 1,
+              }}
               onPress={() => navigation.navigate('MyApplications')}
             >
               <FileText size={22} color="#ffffff" />
@@ -162,7 +179,7 @@ const JobsScreen = ({ navigation }) => {
           
                     style={[{ borderWidth: 0, backgroundColor: 'transparent' }, Platform.OS === 'web' && { outlineStyle: 'none' }]}
                     />
-          <TouchableOpacity className="ml-2 bg-primary/10 p-2 rounded-xl">
+          <TouchableOpacity className="ml-2 p-2 rounded-xl" style={{ backgroundColor: 'rgba(99, 102, 241, 0.1)' }}>
             <SlidersHorizontal size={16} color="#6366F1" />
           </TouchableOpacity>
         </View>
@@ -176,7 +193,19 @@ const JobsScreen = ({ navigation }) => {
               <TouchableOpacity
                 key={cat.id}
                 onPress={() => setActiveCategory(cat.id)}
-                className={`flex-row items-center px-5 py-2.5 rounded-2xl mr-3 border ${isSelected ? 'bg-primary border-primary shadow-md shadow-primary/30' : 'bg-white border-slate-100'}`}
+                className="flex-row items-center px-5 py-2.5 rounded-2xl mr-3 border"
+                style={isSelected ? {
+                  backgroundColor: '#6366F1', // primary
+                  borderColor: '#6366F1',
+                  shadowColor: '#6366F1',
+                  shadowOffset: { width: 0, height: 4 },
+                  shadowOpacity: 0.3,
+                  shadowRadius: 6,
+                  elevation: 4,
+                } : {
+                  backgroundColor: '#ffffff',
+                  borderColor: '#f1f5f9', // slate-100
+                }}
               >
                 <Icon size={16} color={isSelected ? 'white' : cat.color} />
                 <Text className={`font-bold text-xs ml-2 ${isSelected ? 'text-white' : 'text-slate-700'}`}>

@@ -141,7 +141,14 @@ const SupportRequestScreen = ({ navigation }) => {
       <View className="flex-row items-center mt-4 mb-6">
         <TouchableOpacity
           onPress={() => navigation.goBack()}
-          className="w-10 h-10 items-center justify-center bg-white rounded-full shadow-sm"
+          className="w-10 h-10 items-center justify-center bg-white rounded-full"
+          style={{
+            shadowColor: '#0f172a',
+            shadowOffset: { width: 0, height: 2 },
+            shadowOpacity: 0.05,
+            shadowRadius: 4,
+            elevation: 2,
+          }}
         >
           <ArrowLeft size={20} color="#0F172A" />
         </TouchableOpacity>
@@ -175,7 +182,19 @@ const SupportRequestScreen = ({ navigation }) => {
                 <TouchableOpacity
                   key={prio.label}
                   onPress={() => setFormData({ ...formData, priority: prio.label })}
-                  className={`flex-1 py-3 rounded-2xl border items-center justify-center ${isSelected ? 'bg-primary border-primary shadow-md' : 'bg-surface border-border/30'}`}
+                  className="flex-1 py-3 rounded-2xl border items-center justify-center"
+                  style={isSelected ? {
+                    backgroundColor: '#6366F1', // primary
+                    borderColor: '#6366F1',
+                    shadowColor: '#6366F1',
+                    shadowOffset: { width: 0, height: 4 },
+                    shadowOpacity: 0.3,
+                    shadowRadius: 6,
+                    elevation: 4,
+                  } : {
+                    backgroundColor: '#F8FAFC', // slate-50/surface
+                    borderColor: 'rgba(226, 232, 240, 0.3)',
+                  }}
                 >
                   <Text className={`text-xs font-poppins-600 ${isSelected ? 'text-white' : 'text-text-secondary'}`}>
                     {prio.label}
@@ -209,7 +228,11 @@ const SupportRequestScreen = ({ navigation }) => {
           ) : (
             <TouchableOpacity 
               onPress={pickImage}
-              className="h-20 border-2 border-dashed border-border/50 rounded-2xl items-center justify-center flex-row bg-surface mb-8"
+              className="h-20 border-2 border-dashed rounded-2xl items-center justify-center flex-row mb-8"
+              style={{
+                borderColor: 'rgba(226, 232, 240, 0.5)',
+                backgroundColor: '#F8FAFC',
+              }}
             >
               <ImageIcon size={20} color="#94A3B8" />
               <Text className="text-sm font-poppins-500 text-text-secondary ml-3">Attach Evidence (Optional)</Text>
