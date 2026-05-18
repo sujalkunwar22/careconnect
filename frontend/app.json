@@ -34,6 +34,12 @@
     "plugins": [
       "expo-font",
       "expo-secure-store"
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "3d79612a-369a-47ad-be10-da3a883ec2d7"
+      }
+    },
+    "owner": "suzza"
   }
 }
