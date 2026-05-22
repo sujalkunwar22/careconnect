@@ -78,6 +78,21 @@ DATABASE_URL = os.getenv("DATABASE_URL")
 if not DATABASE_URL and SUPABASE_DB_PASSWORD:
     DATABASE_URL = f"postgresql://postgres.tjyzribebypemfpmalge:{SUPABASE_DB_PASSWORD}@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres"
 
+# Auto-rewrite IPv6 direct hostname to IPv4 pooler hostname
+if DATABASE_URL:
+    from urllib.parse import urlparse, urlunparse
+    try:
+        parsed = urlparse(DATABASE_URL)
+        if parsed.hostname == "db.tjyzribebypemfpmalge.supabase.co":
+            netloc = parsed.netloc.replace("db.tjyzribebypemfpmalge.supabase.co", "aws-1-ap-southeast-2.pooler.supabase.com")
+            if netloc.startswith("postgres:"):
+                netloc = "postgres.tjyzribebypemfpmalge:" + netloc[len("postgres:"):]
+            parsed = parsed._replace(netloc=netloc)
+            DATABASE_URL = urlunparse(parsed)
+            os.environ["DATABASE_URL"] = DATABASE_URL
+    except Exception:
+        pass
+
 # SQLite file paths (supports Render persistent volume disks if attached)
 RENDER_DATA_DIR = os.getenv("RENDER_DATA_DIR")
 sqlite_path = None
