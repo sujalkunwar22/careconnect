@@ -1,19 +1,12 @@
 {
-  "version": 2,
-  "builds": [
+  "rewrites": [
     {
-      "src": "backend/careconnect/wsgi.py",
-      "use": "@vercel/python"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/static/(.*)",
-      "dest": "backend/static/$1"
+      "source": "/static/(.*)",
+      "destination": "/backend/staticfiles/$1"
     },
     {
-      "src": "/(.*)",
-      "dest": "backend/careconnect/wsgi.py"
+      "source": "/(.*)",
+      "destination": "/api/index.py"
     }
   ]
 }
