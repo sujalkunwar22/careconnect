@@ -28,7 +28,21 @@ def db_test(request):
         }, status=500)
 
 
+def root_view(request):
+    """Welcome and diagnostics root endpoint."""
+    return JsonResponse({
+        "name": "CareConnect API Backend",
+        "status": "online",
+        "endpoints": {
+            "health": "/api/health/",
+            "db_test": "/api/dbtest/",
+            "admin": "/admin/"
+        }
+    })
+
+
 urlpatterns = [
+    path("", root_view, name="api-root"),
     path("admin/", admin.site.urls),
 
     # Diagnostics

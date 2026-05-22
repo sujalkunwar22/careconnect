@@ -107,6 +107,9 @@ if os.getenv("RENDER") and RENDER_DATA_DIR:
         # Fallback to local files if directory creation fails due to permissions
         sqlite_path = BASE_DIR / "db.sqlite3"
         fallback_path = BASE_DIR / "db_backup_fallback.sqlite3"
+elif os.getenv("VERCEL"):
+    sqlite_path = "/tmp/db.sqlite3"
+    fallback_path = "/tmp/db_backup_fallback.sqlite3"
 else:
     sqlite_path = BASE_DIR / "db.sqlite3"
     fallback_path = BASE_DIR / "db_backup_fallback.sqlite3"
