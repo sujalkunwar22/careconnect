@@ -21,7 +21,7 @@ class User(AbstractUser):
     address = models.CharField(max_length=255, blank=True)
     municipality = models.CharField(max_length=255, blank=True)
     ward = models.CharField(max_length=50, blank=True)
-    profile_image = models.ImageField(upload_to="profiles/", blank=True, null=True)
+    profile_image = models.ImageField(upload_to="profiles/", blank=True, null=True, max_length=500)
     is_kyc_verified = models.BooleanField(default=False)
 
     def delete(self, *args, **kwargs):
@@ -40,7 +40,7 @@ class NGOProfile(models.Model):
     sector = models.CharField(max_length=100, blank=True)
     description = models.TextField(blank=True)
     website = models.URLField(blank=True)
-    logo = models.ImageField(upload_to="ngo_logos/", blank=True, null=True)
+    logo = models.ImageField(upload_to="ngo_logos/", blank=True, null=True, max_length=500)
     is_verified = models.BooleanField(default=False)
 
     def __str__(self) -> str:
@@ -61,9 +61,9 @@ class KYCDocument(models.Model):
 
     user = models.ForeignKey(User, related_name="kyc_documents", on_delete=models.CASCADE)
     document_type = models.CharField(max_length=50, choices=DocType.choices)
-    front_image = models.ImageField(upload_to="kyc/front/")
-    back_image = models.ImageField(upload_to="kyc/back/", blank=True, null=True)
-    selfie_image = models.ImageField(upload_to="kyc/selfie/")
+    front_image = models.ImageField(upload_to="kyc/front/", max_length=500)
+    back_image = models.ImageField(upload_to="kyc/back/", blank=True, null=True, max_length=500)
+    selfie_image = models.ImageField(upload_to="kyc/selfie/", max_length=500)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING)
     rejection_reason = models.TextField(blank=True)
     admin_notes = models.TextField(blank=True)

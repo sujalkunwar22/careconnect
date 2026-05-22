@@ -24,7 +24,7 @@ class Ticket(models.Model):
     priority = models.CharField(max_length=20, choices=Priority.choices, default=Priority.NORMAL)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.OPEN)
     response = models.TextField(blank=True)
-    attachment = models.ImageField(upload_to="support/tickets/", null=True, blank=True)
+    attachment = models.ImageField(upload_to="support/tickets/", null=True, blank=True, max_length=500)
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 

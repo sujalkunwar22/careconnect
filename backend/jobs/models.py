@@ -83,7 +83,7 @@ class Application(models.Model):
         default="portfolio",
         db_index=True,
     )
-    cv_file = models.FileField(upload_to="cvs/", null=True, blank=True)
+    cv_file = models.FileField(upload_to="cvs/", null=True, blank=True, max_length=500)
     status = models.CharField(max_length=20, choices=Status.choices, default=Status.PENDING, db_index=True)
     interview_details = models.JSONField(default=dict, blank=True)
     rejection_reason = models.TextField(blank=True)
