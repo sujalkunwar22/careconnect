@@ -5,6 +5,7 @@ from django.contrib.auth.password_validation import validate_password
 from django.db.models import Q
 from rest_framework import serializers
 
+from core.fields import SupabaseImageField
 from .models import KYCDocument, NGOProfile, OTP, User
 
 
@@ -23,6 +24,7 @@ class UserSerializer(serializers.ModelSerializer):
     experiences = serializers.SerializerMethodField(read_only=True)
     education = serializers.SerializerMethodField(read_only=True)
     certifications = serializers.SerializerMethodField(read_only=True)
+    profile_image = SupabaseImageField(required=False, allow_null=True)
 
     class Meta:
         model = User
@@ -54,6 +56,7 @@ class AdminUserSerializer(serializers.ModelSerializer):
     experiences = serializers.SerializerMethodField(read_only=True)
     education = serializers.SerializerMethodField(read_only=True)
     certifications = serializers.SerializerMethodField(read_only=True)
+    profile_image = SupabaseImageField(required=False, allow_null=True)
 
     class Meta:
         model = User
@@ -263,6 +266,10 @@ class ChangePasswordSerializer(serializers.Serializer):
 
 
 class KYCSubmitSerializer(serializers.ModelSerializer):
+    front_image = SupabaseImageField()
+    back_image = SupabaseImageField(required=False, allow_null=True)
+    selfie_image = SupabaseImageField()
+
     def validate_document_type(self, value):
         # Frontend sends "license"; model uses "drivers_license".
         if value == "license":
@@ -282,6 +289,9 @@ class KYCDocumentSerializer(serializers.ModelSerializer):
     user_name = serializers.CharField(source="user.full_name", read_only=True)
     user_email = serializers.EmailField(source="user.email", read_only=True)
     user_role = serializers.CharField(source="user.role", read_only=True)
+    front_image = SupabaseImageField(read_only=True)
+    back_image = SupabaseImageField(read_only=True, allow_null=True)
+    selfie_image = SupabaseImageField(read_only=True)
 
     class Meta:
         model = KYCDocument

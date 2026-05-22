@@ -1,9 +1,11 @@
 from rest_framework import serializers
-
+from core.fields import SupabaseImageField
 from .models import Ticket
 
 
 class TicketSerializer(serializers.ModelSerializer):
+    attachment = SupabaseImageField(required=False, allow_null=True)
+
     class Meta:
         model = Ticket
         fields = [
@@ -23,6 +25,7 @@ class TicketSerializer(serializers.ModelSerializer):
 class AdminTicketSerializer(serializers.ModelSerializer):
     user_name = serializers.ReadOnlyField(source='user.full_name')
     user_email = serializers.ReadOnlyField(source='user.email')
+    attachment = SupabaseImageField(required=False, allow_null=True)
 
     class Meta:
         model = Ticket

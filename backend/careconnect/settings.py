@@ -72,17 +72,45 @@ try:
 except ImportError:
     dj_database_url = None
 
-if dj_database_url and os.getenv("DATABASE_URL"):
+SUPABASE_DB_PASSWORD = os.getenv("SUPABASE_DB_PASSWORD")
+DATABASE_URL = os.getenv("DATABASE_URL")
+
+if not DATABASE_URL and SUPABASE_DB_PASSWORD:
+    DATABASE_URL = f"postgresql://postgres:{SUPABASE_DB_PASSWORD}@db.tjyzribebypemfpmalge.supabase.co:5432/postgres"
+
+# SQLite file paths (supports Render persistent volume disks if attached)
+RENDER_DATA_DIR = os.getenv("RENDER_DATA_DIR")
+if os.getenv("RENDER") and RENDER_DATA_DIR:
+    os.makedirs(RENDER_DATA_DIR, exist_ok=True)
+    sqlite_path = os.path.join(RENDER_DATA_DIR, "db.sqlite3")
+    fallback_path = os.path.join(RENDER_DATA_DIR, "db_backup_fallback.sqlite3")
+else:
+    sqlite_path = BASE_DIR / "db.sqlite3"
+    fallback_path = BASE_DIR / "db_backup_fallback.sqlite3"
+
+if dj_database_url and DATABASE_URL:
     DATABASES = {
-        "default": dj_database_url.config(conn_max_age=600)
+        "default": dj_database_url.config(
+            default=DATABASE_URL,
+            conn_max_age=600
+        ),
+        "sqlite_backup": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": sqlite_path,
+        }
     }
 else:
     DATABASES = {
         "default": {
             "ENGINE": "django.db.backends.sqlite3",
-            "NAME": BASE_DIR / "db.sqlite3",
+            "NAME": sqlite_path,
+        },
+        "sqlite_backup": {
+            "ENGINE": "django.db.backends.sqlite3",
+            "NAME": fallback_path,
         }
     }
+
 
 AUTH_PASSWORD_VALIDATORS = [
     {"NAME": "django.contrib.auth.password_validation.UserAttributeSimilarityValidator"},
@@ -136,3 +164,8 @@ CORS_ALLOW_ALL_ORIGINS = True
 # File upload limits
 DATA_UPLOAD_MAX_MEMORY_SIZE = 10 * 1024 * 1024  # 10MB
 FILE_UPLOAD_MAX_MEMORY_SIZE = 5 * 1024 * 1024  # 5MB
+
+# Supabase settings
+SUPABASE_URL = os.getenv("SUPABASE_URL") or os.getenv("VITE_SUPABASE_URL") or "https://tjyzribebypemfpmalge.supabase.co"
+SUPABASE_ANON_KEY = os.getenv("SUPABASE_ANON_KEY") or os.getenv("VITE_SUPABASE_ANON_KEY") or "sb_publishable_lCjfHZ9FyxUCtslHhK_sSQ_FUOgtDzq"
+

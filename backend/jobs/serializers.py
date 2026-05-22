@@ -1,4 +1,5 @@
 from rest_framework import serializers
+from core.fields import SupabaseFileField
 from .models import Job, Application
 
 
@@ -71,6 +72,7 @@ class ApplicationSerializer(serializers.ModelSerializer):
     applicant_certifications = serializers.SerializerMethodField(read_only=True)
     applicant_profile_image = serializers.SerializerMethodField(read_only=True)
     applicant_portfolio = serializers.SerializerMethodField(read_only=True)
+    cv_file = SupabaseFileField(required=False, allow_null=True)
 
     class Meta:
         model = Application
@@ -109,6 +111,9 @@ class ApplicationSerializer(serializers.ModelSerializer):
 
     def get_applicant_profile_image(self, obj):
         if obj.applicant.profile_image:
+            name_str = str(obj.applicant.profile_image.name)
+            if name_str.startswith('http://') or name_str.startswith('https://'):
+                return name_str
             request = self.context.get("request")
             if request:
                 return request.build_absolute_uri(obj.applicant.profile_image.url)
@@ -128,6 +133,8 @@ class ApplicationSerializer(serializers.ModelSerializer):
 
 
 class ApplicationApplySerializer(serializers.ModelSerializer):
+    cv_file = SupabaseFileField(required=False, allow_null=True)
+
     class Meta:
         model = Application
         fields = ["id", "job", "cover_letter", "application_type", "cv_file"]
