@@ -182,11 +182,9 @@ class LoginSerializer(serializers.Serializer):
         # Support multiple keys for the login identifier from both validated attrs and initial data
         initial_data = getattr(self, "initial_data", {})
         
-        # DEBUG: Log exact received data to a file
-        with open("login_debug.log", "a") as f:
-            f.write(f"\n--- Login Attempt ---\n")
-            f.write(f"Attrs: {attrs}\n")
-            f.write(f"Initial Data: {initial_data}\n")
+        # DEBUG: Log received data to console (stdout)
+        print(f"LOGIN DEBUG: Attrs: {attrs}")
+        print(f"LOGIN DEBUG: Initial Data: {initial_data}")
         
         raw_identifier = (
             attrs.get("identifier")

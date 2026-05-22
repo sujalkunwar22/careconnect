@@ -85,15 +85,11 @@ class ProfileView(generics.RetrieveUpdateAPIView):
         return self.request.user
 
     def update(self, request, *args, **kwargs):
-        with open("profile_debug.log", "a") as f:
-            f.write(f"\n--- Profile Update Attempt ---\n")
-            f.write(f"Data: {request.data}\n")
+        print(f"DEBUG: Profile Update Attempt - Data: {request.data}")
         
         instance = self.get_object()
         serializer = self.get_serializer(instance, data=request.data, partial=True)
         if not serializer.is_valid():
-            with open("profile_debug.log", "a") as f:
-                f.write(f"Validation Errors: {serializer.errors}\n")
             print(f"DEBUG: Profile serializer validation errors: {serializer.errors}")
         return super().update(request, *args, **kwargs)
 
