@@ -76,7 +76,7 @@ SUPABASE_DB_PASSWORD = os.getenv("SUPABASE_DB_PASSWORD")
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if not DATABASE_URL and SUPABASE_DB_PASSWORD:
-    DATABASE_URL = f"postgresql://postgres:{SUPABASE_DB_PASSWORD}@db.tjyzribebypemfpmalge.supabase.co:5432/postgres"
+    DATABASE_URL = f"postgresql://postgres.tjyzribebypemfpmalge:{SUPABASE_DB_PASSWORD}@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres"
 
 # SQLite file paths (supports Render persistent volume disks if attached)
 RENDER_DATA_DIR = os.getenv("RENDER_DATA_DIR")
