@@ -276,7 +276,7 @@ const PortfolioScreen = ({ navigation }) => {
             <ArrowLeft size={24} color={COLORS.navy} />
           </TouchableOpacity>
           <Text style={styles.headerTitle}>Professional Portfolio</Text>
-          <View style={{ width: 40 }} /> {/* Spacer */}
+          <View style={{ width: 40 }} />
         </View>
 
         {/* Cover + Avatar */}

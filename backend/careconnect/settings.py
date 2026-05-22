@@ -80,10 +80,18 @@ if not DATABASE_URL and SUPABASE_DB_PASSWORD:
 
 # SQLite file paths (supports Render persistent volume disks if attached)
 RENDER_DATA_DIR = os.getenv("RENDER_DATA_DIR")
+sqlite_path = None
+fallback_path = None
+
 if os.getenv("RENDER") and RENDER_DATA_DIR:
-    os.makedirs(RENDER_DATA_DIR, exist_ok=True)
-    sqlite_path = os.path.join(RENDER_DATA_DIR, "db.sqlite3")
-    fallback_path = os.path.join(RENDER_DATA_DIR, "db_backup_fallback.sqlite3")
+    try:
+        os.makedirs(RENDER_DATA_DIR, exist_ok=True)
+        sqlite_path = os.path.join(RENDER_DATA_DIR, "db.sqlite3")
+        fallback_path = os.path.join(RENDER_DATA_DIR, "db_backup_fallback.sqlite3")
+    except Exception as e:
+        # Fallback to local files if directory creation fails due to permissions
+        sqlite_path = BASE_DIR / "db.sqlite3"
+        fallback_path = BASE_DIR / "db_backup_fallback.sqlite3"
 else:
     sqlite_path = BASE_DIR / "db.sqlite3"
     fallback_path = BASE_DIR / "db_backup_fallback.sqlite3"
