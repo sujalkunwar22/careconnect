@@ -12,7 +12,7 @@ const inferredHost = hostUri.split(":")[0] || localhost;
 // However, inferredHost from hostUri is usually the correct machine IP.
 
 export const API_BASE_URL =
-  process.env.EXPO_PUBLIC_API_URL || 
+  (process.env.EXPO_PUBLIC_API_URL ? process.env.EXPO_PUBLIC_API_URL.trim() : "") || 
   `http://${inferredHost}:8000/api/v1`;
 
 console.log("Connecting to API at:", API_BASE_URL);

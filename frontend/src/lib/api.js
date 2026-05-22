@@ -8,7 +8,7 @@ import Constants from 'expo-constants';
 const getBaseUrl = () => {
   // Prioritize environment variable if defined
   if (process.env.EXPO_PUBLIC_API_URL) {
-    return process.env.EXPO_PUBLIC_API_URL;
+    return process.env.EXPO_PUBLIC_API_URL.trim();
   }
 
   // On web, use localhost
