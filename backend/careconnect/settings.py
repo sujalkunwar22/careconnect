@@ -76,20 +76,42 @@ SUPABASE_DB_PASSWORD = os.getenv("SUPABASE_DB_PASSWORD")
 DATABASE_URL = os.getenv("DATABASE_URL")
 
 if not DATABASE_URL and SUPABASE_DB_PASSWORD:
-    DATABASE_URL = f"postgresql://postgres.tjyzribebypemfpmalge:{SUPABASE_DB_PASSWORD}@aws-1-ap-southeast-2.pooler.supabase.com:5432/postgres"
+    DATABASE_URL = f"postgresql://postgres.tjyzribebypemfpmalge:{SUPABASE_DB_PASSWORD}@aws-1-ap-southeast-2.pooler.supabase.com:6543/postgres"
 
-# Auto-rewrite IPv6 direct hostname to IPv4 pooler hostname
+# Auto-rewrite IPv6 direct hostname to IPv4 pooler hostname and force port 6543 (transaction mode)
 if DATABASE_URL:
     from urllib.parse import urlparse, urlunparse
     try:
         parsed = urlparse(DATABASE_URL)
+        netloc = parsed.netloc
+        
+        # Replace direct hostname with pooler hostname
         if parsed.hostname == "db.tjyzribebypemfpmalge.supabase.co":
-            netloc = parsed.netloc.replace("db.tjyzribebypemfpmalge.supabase.co", "aws-1-ap-southeast-2.pooler.supabase.com")
-            if netloc.startswith("postgres:"):
+            netloc = netloc.replace("db.tjyzribebypemfpmalge.supabase.co", "aws-1-ap-southeast-2.pooler.supabase.com")
+            
+        # Ensure correct username prefix and port 6543 for the pooler to run in Transaction Mode
+        if "pooler.supabase.com" in netloc:
+            if netloc.startswith("postgres:") and not netloc.startswith("postgres.tjyzribebypemfpmalge:"):
                 netloc = "postgres.tjyzribebypemfpmalge:" + netloc[len("postgres:"):]
-            parsed = parsed._replace(netloc=netloc)
-            DATABASE_URL = urlunparse(parsed)
-            os.environ["DATABASE_URL"] = DATABASE_URL
+            
+            if "@" in netloc:
+                auth_part, host_part = netloc.rsplit("@", 1)
+                if ":" in host_part:
+                    host, _ = host_part.split(":", 1)
+                    host_part = f"{host}:6543"
+                else:
+                    host_part = f"{host_part}:6543"
+                netloc = f"{auth_part}@{host_part}"
+            else:
+                if ":" in netloc:
+                    host, _ = netloc.split(":", 1)
+                    netloc = f"{host}:6543"
+                else:
+                    netloc = f"{netloc}:6543"
+                    
+        parsed = parsed._replace(netloc=netloc)
+        DATABASE_URL = urlunparse(parsed)
+        os.environ["DATABASE_URL"] = DATABASE_URL
     except Exception:
         pass
 
@@ -118,7 +140,7 @@ if dj_database_url and DATABASE_URL:
     DATABASES = {
         "default": dj_database_url.config(
             default=DATABASE_URL,
-            conn_max_age=600
+            conn_max_age=0
         ),
         "sqlite_backup": {
             "ENGINE": "django.db.backends.sqlite3",
