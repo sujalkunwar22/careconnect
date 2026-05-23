@@ -407,6 +407,19 @@ class OTPRequestView(generics.CreateAPIView):
     serializer_class = OTPSerializer
     permission_classes = [permissions.AllowAny]
 
+    def create(self, request, *args, **kwargs):
+        import os
+        serializer = self.get_serializer(data=request.data)
+        serializer.is_valid(raise_exception=True)
+        self.perform_create(serializer)
+        headers = self.get_success_headers(serializer.data)
+        bypass_twilio = os.getenv("BYPASS_TWILIO", "False") == "True"
+        response_data = {
+            **serializer.data,
+            "bypass": bypass_twilio
+        }
+        return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
+
     def perform_create(self, serializer):
         import random
         import os
