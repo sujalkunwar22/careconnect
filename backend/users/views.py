@@ -414,11 +414,11 @@ class OTPRequestView(generics.CreateAPIView):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         bypass_twilio = os.getenv("BYPASS_TWILIO", "False") == "True"
-        bypass_web3forms = os.getenv("BYPASS_WEB3FORMS", "False") == "True"
+        bypass_email = os.getenv("BYPASS_EMAIL", "False") == "True"
         response_data = {
             **serializer.data,
             "bypass_twilio": bypass_twilio,
-            "bypass_web3forms": bypass_web3forms,
+            "bypass_email": bypass_email,
             "bypass": bypass_twilio
         }
         return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
@@ -463,28 +463,23 @@ class OTPRequestView(generics.CreateAPIView):
         except Exception as e:
             print(f"[Twilio Error] Failed to send SMS: {e}")
             
-        # Send Email via Web3Forms
-        web3forms_key = os.getenv("WEB3FORMS_ACCESS_KEY")
-        bypass_web3forms = os.getenv("BYPASS_WEB3FORMS", "False") == "True"
-        if web3forms_key and email and not bypass_web3forms:
+        # Send Email via Django send_mail (Gmail SMTP)
+        bypass_email = os.getenv("BYPASS_EMAIL", "False") == "True"
+        if email and not bypass_email:
             try:
-                import requests
-                payload = {
-                    "access_key": web3forms_key,
-                    "email": email,
-                    "subject": "CareConnect Verification Code",
-                    "from_name": "CareConnect Nepal",
-                    "message": f"Your CareConnect OTP verification code is: {code}. Please use this code to complete your registration.",
-                }
-                response = requests.post("https://api.web3forms.com/submit", json=payload, timeout=10)
-                if response.status_code == 200:
-                    print(f"[Web3Forms] Successfully submitted OTP email for {email}: {response.json()}")
-                else:
-                    print(f"[Web3Forms Fail] Status code {response.status_code}: {response.text}")
+                from django.core.mail import send_mail
+                send_mail(
+                    subject="CareConnect Verification Code",
+                    message=f"Your CareConnect OTP verification code is: {code}. Please use this code to complete your registration.",
+                    from_email=None,
+                    recipient_list=[email],
+                    fail_silently=False,
+                )
+                print(f"[SMTP] Successfully sent OTP email to {email}")
             except Exception as e:
-                print(f"[Web3Forms Error] Failed to send email: {e}")
+                print(f"[SMTP Error] Failed to send email to {email}: {e}")
         else:
-            print(f"[Web3Forms] Email sending skipped. Configured: {bool(web3forms_key)}, Recipient: {email}, Bypass: {bypass_web3forms}")
+            print(f"[SMTP] Email sending skipped. Recipient: {email}, Bypass: {bypass_email}")
         
         # For development fallback
         print(f"[DEV] OTP for {phone_number}: {code}")

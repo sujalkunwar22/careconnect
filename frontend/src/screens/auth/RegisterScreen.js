@@ -91,33 +91,11 @@ const RegisterScreen = ({ navigation }) => {
         website: formData.website,
       };
 
-      // Request OTP code to user's phone number first (also pass email for Web3Forms)
-      const otpResponse = await api.post('/auth/otp/request/', { 
+      // Request OTP code to user's phone number first (also pass email for SMTP verification)
+      await api.post('/auth/otp/request/', { 
         phone_number: payload.phone_number,
         email: payload.email
       });
-      
-      const { code, bypass_web3forms, bypass } = otpResponse.data;
-      const shouldBypassWeb3Forms = bypass_web3forms !== undefined ? bypass_web3forms : bypass;
-
-      // Send Web3Forms verification email directly from client-side (to bypass server restrictions on free keys)
-      if (!shouldBypassWeb3Forms && payload.email) {
-        try {
-          const web3FormData = new FormData();
-          web3FormData.append("access_key", "a345d492-20af-4ecc-8d90-088ea4832774");
-          web3FormData.append("email", payload.email);
-          web3FormData.append("subject", "CareConnect Verification Code");
-          web3FormData.append("from_name", "CareConnect Nepal");
-          web3FormData.append("message", `Your CareConnect OTP verification code is: ${code}. Please enter this code to complete registration.`);
-          
-          await fetch("https://api.web3forms.com/submit", {
-            method: "POST",
-            body: web3FormData
-          });
-        } catch (mailErr) {
-          console.error("Failed to dispatch Web3Forms email from client:", mailErr);
-        }
-      }
       
       setIsLoading(false);
       // Navigate to OTP verification screen passing the registration data
