@@ -210,7 +210,7 @@ const AdminDashboardScreen = () => {
   };
 
   const stats = [
-    { title: 'Total Users', value: dashboardStats.total_users > 1000 ? `${(dashboardStats.total_users / 1000).toFixed(1)}k` : dashboardStats.total_users.toString(), icon: <Users size={22} color={COLORS.navy} />, bg: '#e8edf4' },
+    { title: 'Total Users', value: (dashboardStats.total_users + dashboardStats.total_ngos) > 1000 ? `${((dashboardStats.total_users + dashboardStats.total_ngos) / 1000).toFixed(1)}k` : (dashboardStats.total_users + dashboardStats.total_ngos).toString(), icon: <Users size={22} color={COLORS.navy} />, bg: '#e8edf4' },
     { title: 'Total NGOs', value: dashboardStats.total_ngos.toString(), icon: <Building2 size={22} color={COLORS.success} />, bg: '#e2f0ea' },
     { title: 'Open Issues', value: ticketCount.toString(), icon: <Ticket size={22} color={COLORS.tertiary} />, bg: '#e0f0f8' },
     { title: 'Pending KYC', value: dashboardStats.pending_kyc.toString(), icon: <FileText size={22} color={COLORS.primaryContainer} />, bg: '#fde8ea' },

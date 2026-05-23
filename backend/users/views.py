@@ -190,6 +190,10 @@ class AdminStatsView(views.APIView):
         pending_kyc = KYCDocument.objects.filter(status=KYCDocument.Status.PENDING).count()
         total_applications = Application.objects.count()
 
+        # Count of KYC documents verified today
+        today_start = timezone.now().replace(hour=0, minute=0, second=0, microsecond=0)
+        verified_today_count = KYCDocument.objects.filter(status=KYCDocument.Status.VERIFIED, reviewed_at__gte=today_start).count()
+
         # Registration stats for last 6 months
         now = timezone.now()
         monthly_registrations = []
@@ -301,6 +305,10 @@ class AdminStatsView(views.APIView):
             "total_applications": total_applications,
             "monthly_registrations": monthly_registrations,
             "recent_activity": recent_activity,
+            # Additional keys for verifier and other dashboards
+            "total_caregivers": total_users,
+            "pending_kyc_count": pending_kyc,
+            "verified_today_count": verified_today_count,
         })
 
 
@@ -401,11 +409,42 @@ class OTPRequestView(generics.CreateAPIView):
 
     def perform_create(self, serializer):
         import random
+        import os
         phone_number = serializer.validated_data["phone_number"]
         code = str(random.randint(100000, 999999))
         OTP.objects.filter(phone_number=phone_number, is_used=False).update(is_used=True)
         serializer.save(code=code)
-        # In production: send SMS via gateway
+        
+        # Send SMS via Twilio
+        try:
+            from twilio.rest import Client
+            account_sid = os.getenv("TWILIO_ACCOUNT_SID")
+            auth_token = os.getenv("TWILIO_AUTH_TOKEN")
+            from_number = os.getenv("TWILIO_PHONE_NUMBER")
+            
+            if account_sid and auth_token and from_number:
+                client = Client(account_sid, auth_token)
+                # Ensure the phone number starts with + and has country code
+                to_number = phone_number
+                if not to_number.startswith("+"):
+                    # Prepend Nepal code (+977) if 10-digit number starting with 9
+                    if len(to_number) == 10 and to_number.startswith("9"):
+                        to_number = "+977" + to_number
+                    else:
+                        to_number = "+" + to_number
+                
+                message = client.messages.create(
+                    body=f"Your CareConnect verification code is: {code}",
+                    from_=from_number,
+                    to=to_number
+                )
+                print(f"[Twilio] Sent SMS SID: {message.sid} to {to_number}")
+            else:
+                print("[Twilio] Missing Twilio configuration variables.")
+        except Exception as e:
+            print(f"[Twilio Error] Failed to send SMS: {e}")
+        
+        # For development fallback
         print(f"[DEV] OTP for {phone_number}: {code}")
 
 
