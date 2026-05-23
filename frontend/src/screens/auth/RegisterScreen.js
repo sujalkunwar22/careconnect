@@ -5,6 +5,7 @@ import Input from '../../components/common/Input';
 import { MaterialIcons } from '@expo/vector-icons';
 import Checkbox from '../../components/common/Checkbox';
 import useAuthStore from '../../stores/authStore';
+import api from '../../lib/api';
 
 
 const RegisterScreen = ({ navigation }) => {
@@ -90,8 +91,15 @@ const RegisterScreen = ({ navigation }) => {
         website: formData.website,
       };
 
-      await registerUser(payload);
+      // Request OTP code to user's phone number first
+      await api.post('/auth/otp/request/', { phone_number: payload.phone_number });
+      
       setIsLoading(false);
+      // Navigate to OTP verification screen passing the registration data
+      navigation.navigate('OtpVerification', {
+        phone: payload.phone_number,
+        registrationData: payload,
+      });
     } catch (err) {
       setIsLoading(false);
       const data = err.response?.data;

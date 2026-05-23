@@ -421,8 +421,9 @@ class OTPRequestView(generics.CreateAPIView):
             account_sid = os.getenv("TWILIO_ACCOUNT_SID")
             auth_token = os.getenv("TWILIO_AUTH_TOKEN")
             from_number = os.getenv("TWILIO_PHONE_NUMBER")
+            bypass_twilio = os.getenv("BYPASS_TWILIO", "False") == "True"
             
-            if account_sid and auth_token and from_number:
+            if account_sid and auth_token and from_number and not bypass_twilio:
                 client = Client(account_sid, auth_token)
                 # Ensure the phone number starts with + and has country code
                 to_number = phone_number
@@ -440,7 +441,7 @@ class OTPRequestView(generics.CreateAPIView):
                 )
                 print(f"[Twilio] Sent SMS SID: {message.sid} to {to_number}")
             else:
-                print("[Twilio] Missing Twilio configuration variables.")
+                print(f"[Twilio] SMS sending skipped. Configured: {bool(account_sid and auth_token and from_number)}, Bypass: {bypass_twilio}")
         except Exception as e:
             print(f"[Twilio Error] Failed to send SMS: {e}")
         

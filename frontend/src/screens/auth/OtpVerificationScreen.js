@@ -9,6 +9,7 @@ import { Alert } from 'react-native';
 
 const OtpVerificationScreen = ({ route, navigation }) => {
   const verifyOtp = useAuthStore((s) => s.verifyOtp);
+  const register = useAuthStore((s) => s.register);
   const phone = route?.params?.phone || '+977 98XXXXXXX';
   const [otp, setOtp] = useState(['', '', '', '', '', '']);
   const [isLoading, setIsLoading] = useState(false);
@@ -69,17 +70,28 @@ const OtpVerificationScreen = ({ route, navigation }) => {
     Keyboard.dismiss();
 
     try {
+      // 1. Verify OTP first
       await verifyOtp({
         phone_number: phone,
         code: otpValue
       });
+
+      // 2. Complete registration if registrationData is provided
+      const registrationData = route.params?.registrationData;
+      if (registrationData) {
+        await register(registrationData);
+      }
+      
       setIsLoading(false);
       
-      // Navigate to KYC Upload next as per flow
-      navigation.navigate('KycSubmit');
+      // 3. For legacy flow without registrationData, manually go to KycSubmit.
+      // For registration, register() sets user and logs in, prompting navigator redirection.
+      if (!registrationData) {
+        navigation.navigate('KycSubmit');
+      }
     } catch (err) {
       setIsLoading(false);
-      const msg = err.response?.data?.error || err.response?.data?.detail || 'Invalid OTP';
+      const msg = err.response?.data?.error || err.response?.data?.detail || err.message || 'Invalid OTP';
       Alert.alert('Verification Failed', msg);
     }
   };

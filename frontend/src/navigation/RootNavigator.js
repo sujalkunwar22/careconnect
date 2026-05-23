@@ -6,6 +6,7 @@ import useAuthStore from '../stores/authStore';
 import LoginScreen from '../screens/auth/LoginScreen';
 import RegisterScreen from '../screens/auth/RegisterScreen';
 import OnboardingScreen from '../screens/auth/OnboardingScreen';
+import OtpVerificationScreen from '../screens/auth/OtpVerificationScreen';
 import LandingPage from '../screens/LandingPage';
 
 // Tab navigators
@@ -67,6 +68,7 @@ export default function RootNavigator() {
           <Stack.Screen name="Onboarding" component={OnboardingScreen} />
           <Stack.Screen name="Login" component={LoginScreen} />
           <Stack.Screen name="Register" component={RegisterScreen} />
+          <Stack.Screen name="OtpVerification" component={OtpVerificationScreen} />
         </Stack.Group>
       ) : (
         <Stack.Group>
