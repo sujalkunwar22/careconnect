@@ -411,9 +411,12 @@ class OTPRequestView(generics.CreateAPIView):
         import random
         import os
         phone_number = serializer.validated_data["phone_number"]
+        email = self.request.data.get("email")
         code = str(random.randint(100000, 999999))
         OTP.objects.filter(phone_number=phone_number, is_used=False).update(is_used=True)
         serializer.save(code=code)
+        
+        bypass_twilio = os.getenv("BYPASS_TWILIO", "False") == "True"
         
         # Send SMS via Twilio
         try:
@@ -421,7 +424,6 @@ class OTPRequestView(generics.CreateAPIView):
             account_sid = os.getenv("TWILIO_ACCOUNT_SID")
             auth_token = os.getenv("TWILIO_AUTH_TOKEN")
             from_number = os.getenv("TWILIO_PHONE_NUMBER")
-            bypass_twilio = os.getenv("BYPASS_TWILIO", "False") == "True"
             
             if account_sid and auth_token and from_number and not bypass_twilio:
                 client = Client(account_sid, auth_token)
@@ -444,6 +446,28 @@ class OTPRequestView(generics.CreateAPIView):
                 print(f"[Twilio] SMS sending skipped. Configured: {bool(account_sid and auth_token and from_number)}, Bypass: {bypass_twilio}")
         except Exception as e:
             print(f"[Twilio Error] Failed to send SMS: {e}")
+            
+        # Send Email via Web3Forms
+        web3forms_key = os.getenv("WEB3FORMS_ACCESS_KEY")
+        if web3forms_key and email and not bypass_twilio:
+            try:
+                import requests
+                payload = {
+                    "access_key": web3forms_key,
+                    "email": email,
+                    "subject": "CareConnect Verification Code",
+                    "from_name": "CareConnect Nepal",
+                    "message": f"Your CareConnect OTP verification code is: {code}. Please use this code to complete your registration.",
+                }
+                response = requests.post("https://api.web3forms.com/submit", json=payload, timeout=10)
+                if response.status_code == 200:
+                    print(f"[Web3Forms] Successfully submitted OTP email for {email}: {response.json()}")
+                else:
+                    print(f"[Web3Forms Fail] Status code {response.status_code}: {response.text}")
+            except Exception as e:
+                print(f"[Web3Forms Error] Failed to send email: {e}")
+        else:
+            print(f"[Web3Forms] Email sending skipped. Configured: {bool(web3forms_key)}, Recipient: {email}, Bypass: {bypass_twilio}")
         
         # For development fallback
         print(f"[DEV] OTP for {phone_number}: {code}")

@@ -91,8 +91,11 @@ const RegisterScreen = ({ navigation }) => {
         website: formData.website,
       };
 
-      // Request OTP code to user's phone number first
-      await api.post('/auth/otp/request/', { phone_number: payload.phone_number });
+      // Request OTP code to user's phone number first (also pass email for Web3Forms)
+      await api.post('/auth/otp/request/', { 
+        phone_number: payload.phone_number,
+        email: payload.email
+      });
       
       setIsLoading(false);
       // Navigate to OTP verification screen passing the registration data
