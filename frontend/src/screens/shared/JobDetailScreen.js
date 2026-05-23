@@ -27,7 +27,7 @@ import JobsService from '../../services/jobsService';
 import useAuthStore from '../../stores/authStore';
 import AdminService from '../../services/adminService';
 import PortfolioService from '../../services/portfolioService';
-import { Power, Edit } from 'lucide-react-native';
+import { Power, Edit, ChevronRight } from 'lucide-react-native';
 import * as DocumentPicker from 'expo-document-picker';
 
 const JobDetailScreen = ({ route, navigation }) => {
@@ -41,6 +41,7 @@ const JobDetailScreen = ({ route, navigation }) => {
   const [applying, setApplying] = useState(false);
   const user = useAuthStore(state => state.user);
   const isNgo = user?.role === 'ngo';
+  const isAdmin = user?.role === 'admin' || adminMode;
 
   // Job Application States
   const [showApplyModal, setShowApplyModal] = useState(false);
@@ -50,6 +51,8 @@ const JobDetailScreen = ({ route, navigation }) => {
   const [showPreviewModal, setShowPreviewModal] = useState(false);
   const [portfolio, setPortfolio] = useState(null);
   const [loadingPortfolio, setLoadingPortfolio] = useState(false);
+  const [applicants, setApplicants] = useState([]);
+  const [loadingApplicants, setLoadingApplicants] = useState(false);
 
   useEffect(() => {
     if (showApplyModal && activeTab === 'portfolio' && !portfolio && user && !isNgo) {
@@ -73,11 +76,26 @@ const JobDetailScreen = ({ route, navigation }) => {
     const controller = new AbortController();
     if (targetJobId) {
       fetchJobDetails(targetJobId, controller.signal);
+      if (isAdmin) {
+        fetchApplicants(targetJobId);
+      }
     } else if (!passedJob) {
       setLoading(false);
     }
     return () => controller.abort();
-  }, [targetJobId]);
+  }, [targetJobId, isAdmin]);
+
+  const fetchApplicants = async (jobId) => {
+    setLoadingApplicants(true);
+    try {
+      const data = await JobsService.getNgoApplications({ job: jobId });
+      setApplicants(data || []);
+    } catch (error) {
+      console.warn('Failed to fetch job applicants for admin:', error);
+    } finally {
+      setLoadingApplicants(false);
+    }
+  };
 
   const fetchJobDetails = async (id, signal) => {
     try {
@@ -440,8 +458,62 @@ const JobDetailScreen = ({ route, navigation }) => {
             </View>
           )}
 
+          {/* Admin Applicants List Section */}
+          {isAdmin && (
+            <View className="bg-white rounded-[24px] p-5 shadow-sm border border-slate-100 mt-5">
+              <Text className="text-[11px] font-bold text-slate-400 uppercase tracking-widest mb-4 ml-2" style={{ fontFamily: 'Poppins_600SemiBold' }}>
+                Job Applicants ({applicants.length})
+              </Text>
+              
+              {loadingApplicants ? (
+                <ActivityIndicator size="small" color="#6366F1" className="py-6" />
+              ) : applicants.length > 0 ? (
+                <View className="flex-col gap-3">
+                  {applicants.map((app) => (
+                    <TouchableOpacity
+                      key={app.id}
+                      onPress={() => navigation.navigate('ApplicationReview', { applicationId: app.id, applicationData: app })}
+                      className="bg-slate-50 border border-slate-100 rounded-2xl p-4 flex-row justify-between items-center"
+                    >
+                      <View className="flex-1 mr-4">
+                        <Text className="text-sm font-bold text-slate-800" style={{ fontFamily: 'Poppins_600SemiBold' }}>
+                          {app.applicant_name}
+                        </Text>
+                        <Text className="text-xs text-slate-400 font-medium mt-0.5" style={{ fontFamily: 'Inter_400Regular' }}>
+                          {app.applicant_title || 'Skilled Professional'}
+                        </Text>
+                        <Text className="text-[10px] text-slate-400 mt-2" style={{ fontFamily: 'Inter_400Regular' }}>
+                          Applied: {new Date(app.created_at).toLocaleDateString()}
+                        </Text>
+                      </View>
+                      
+                      <View className="flex-row items-center gap-2">
+                        <View className={`px-2 py-1 rounded-lg ${
+                          app.status === 'hired' ? 'bg-green-100 text-green-700' :
+                          app.status === 'rejected' ? 'bg-red-100 text-red-700' :
+                          app.status === 'interview' ? 'bg-blue-100 text-blue-700' :
+                          app.status === 'shortlisted' ? 'bg-cyan-100 text-cyan-700' :
+                          'bg-amber-100 text-amber-700'
+                        }`}>
+                          <Text className="text-[9px] font-bold uppercase tracking-wider" style={{ fontFamily: 'Poppins_600SemiBold' }}>
+                            {app.status}
+                          </Text>
+                        </View>
+                        <ChevronRight size={16} color="#CBD5E1" />
+                      </View>
+                    </TouchableOpacity>
+                  ))}
+                </View>
+              ) : (
+                <View className="py-8 items-center justify-center bg-slate-50 rounded-2xl border border-dashed border-slate-200">
+                  <Text className="text-slate-400 text-sm font-medium" style={{ fontFamily: 'Inter_500Medium' }}>No applications submitted yet.</Text>
+                </View>
+              )}
+            </View>
+          )}
+
           {/* Floating Action Button for Application */}
-          {!isNgo && !adminMode && (
+          {!isNgo && !isAdmin && (
             <View className="mt-4">
               <TouchableOpacity
                 onPress={handleApply}

@@ -22,7 +22,9 @@ def mirror_save_to_backup(sender, instance, **kwargs):
         if 'sqlite_backup' in settings.DATABASES:
             try:
                 # Save the instance to the backup database
+                orig_db = instance._state.db
                 instance.save(using='sqlite_backup')
+                instance._state.db = orig_db
                 logger.info(f"Successfully mirrored save of {sender.__name__} (ID: {instance.pk}) to sqlite_backup")
             except Exception as e:
                 logger.error(f"Failed to mirror save of {sender.__name__} (ID: {instance.pk}) to sqlite_backup: {e}")

@@ -1,9 +1,9 @@
 import os
 import uuid
 import logging
-from django.db.models.signals import pre_save
+from django.db.models.signals import pre_save, post_save
 from django.dispatch import receiver
-from .models import Application
+from .models import Application, Job
 from core.supabase import upload_to_supabase
 
 logger = logging.getLogger(__name__)
@@ -60,3 +60,22 @@ def application_pre_save(sender, instance, **kwargs):
     if _signals_muted or using != 'default':
         return
     process_file_upload(instance, 'cv_file', 'cvs')
+
+
+@receiver(post_save, sender=Application)
+def close_job_on_hire(sender, instance, created, **kwargs):
+    """
+    After saving a job Application, if the candidate is marked as hired,
+    close the corresponding job listing automatically.
+    """
+    using = kwargs.get('using', 'default')
+    from core.signals import _signals_muted
+    if _signals_muted or using != 'default':
+        return
+        
+    if instance.status == Application.Status.HIRED:
+        job = instance.job
+        if job.status != Job.Status.CLOSED:
+            job.status = Job.Status.CLOSED
+            job.save(update_fields=["status"])
+            logger.info(f"Job (ID: {job.id}, Title: {job.title}) closed automatically due to candidate hire (Application ID: {instance.id}).")

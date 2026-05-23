@@ -77,7 +77,8 @@ const JobsManagementScreen = ({ navigation }) => {
                          (job.company_name || '').toLowerCase().includes(searchQuery.toLowerCase());
     
     if (filterStatus === 'active') return matchesSearch && job.is_active;
-    if (filterStatus === 'inactive') return matchesSearch && !job.is_active;
+    if (filterStatus === 'inactive') return matchesSearch && !job.is_active && job.status !== 'closed';
+    if (filterStatus === 'finished') return matchesSearch && job.status === 'closed';
     return matchesSearch;
   });
 
@@ -92,9 +93,13 @@ const JobsManagementScreen = ({ navigation }) => {
             {job.company_name || 'Care Connect NGO'}
           </Text>
           <View className="flex-row items-center gap-2 mb-3">
-            <View className={`px-2 py-0.5 rounded-full ${job.is_active ? 'bg-green-100' : 'bg-slate-100'}`}>
-              <Text className={`text-[10px] font-bold ${job.is_active ? 'text-green-700' : 'text-slate-600'}`}>
-                {job.is_active ? 'ACTIVE' : 'INACTIVE'}
+            <View className={`px-2 py-0.5 rounded-full ${
+              job.status === 'closed' ? 'bg-amber-100' : (job.is_active ? 'bg-green-100' : 'bg-slate-100')
+            }`}>
+              <Text className={`text-[10px] font-bold ${
+                job.status === 'closed' ? 'text-amber-700' : (job.is_active ? 'text-green-700' : 'text-slate-600')
+              }`}>
+                {job.status === 'closed' ? 'FINISHED' : (job.is_active ? 'ACTIVE' : 'INACTIVE')}
               </Text>
             </View>
             <Text className="text-[12px] text-slate-400">• {job.application_count || 0} applicants</Text>
@@ -103,7 +108,7 @@ const JobsManagementScreen = ({ navigation }) => {
         
         <View className="flex-row gap-2">
           <TouchableOpacity 
-            onPress={() => navigation.navigate('JobDetail', { jobId: job.id })}
+            onPress={() => navigation.navigate('JobDetail', { jobId: job.id, adminMode: true })}
             className="p-2 bg-slate-50 rounded-lg"
           >
             <Eye size={18} color="#64748B" />
@@ -180,7 +185,7 @@ const JobsManagementScreen = ({ navigation }) => {
         </View>
 
         <View className="flex-row gap-2 mb-6">
-          {['all', 'active', 'inactive'].map((status) => (
+          {['all', 'active', 'inactive', 'finished'].map((status) => (
             <TouchableOpacity
               key={status}
               onPress={() => setFilterStatus(status)}
