@@ -414,8 +414,11 @@ class OTPRequestView(generics.CreateAPIView):
         self.perform_create(serializer)
         headers = self.get_success_headers(serializer.data)
         bypass_twilio = os.getenv("BYPASS_TWILIO", "False") == "True"
+        bypass_web3forms = os.getenv("BYPASS_WEB3FORMS", "False") == "True"
         response_data = {
             **serializer.data,
+            "bypass_twilio": bypass_twilio,
+            "bypass_web3forms": bypass_web3forms,
             "bypass": bypass_twilio
         }
         return Response(response_data, status=status.HTTP_201_CREATED, headers=headers)
@@ -462,7 +465,8 @@ class OTPRequestView(generics.CreateAPIView):
             
         # Send Email via Web3Forms
         web3forms_key = os.getenv("WEB3FORMS_ACCESS_KEY")
-        if web3forms_key and email and not bypass_twilio:
+        bypass_web3forms = os.getenv("BYPASS_WEB3FORMS", "False") == "True"
+        if web3forms_key and email and not bypass_web3forms:
             try:
                 import requests
                 payload = {
@@ -480,7 +484,7 @@ class OTPRequestView(generics.CreateAPIView):
             except Exception as e:
                 print(f"[Web3Forms Error] Failed to send email: {e}")
         else:
-            print(f"[Web3Forms] Email sending skipped. Configured: {bool(web3forms_key)}, Recipient: {email}, Bypass: {bypass_twilio}")
+            print(f"[Web3Forms] Email sending skipped. Configured: {bool(web3forms_key)}, Recipient: {email}, Bypass: {bypass_web3forms}")
         
         # For development fallback
         print(f"[DEV] OTP for {phone_number}: {code}")

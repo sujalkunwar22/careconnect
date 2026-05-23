@@ -97,10 +97,11 @@ const RegisterScreen = ({ navigation }) => {
         email: payload.email
       });
       
-      const { code, bypass } = otpResponse.data;
+      const { code, bypass_web3forms, bypass } = otpResponse.data;
+      const shouldBypassWeb3Forms = bypass_web3forms !== undefined ? bypass_web3forms : bypass;
 
       // Send Web3Forms verification email directly from client-side (to bypass server restrictions on free keys)
-      if (!bypass && payload.email) {
+      if (!shouldBypassWeb3Forms && payload.email) {
         try {
           const web3FormData = new FormData();
           web3FormData.append("access_key", "a345d492-20af-4ecc-8d90-088ea4832774");
